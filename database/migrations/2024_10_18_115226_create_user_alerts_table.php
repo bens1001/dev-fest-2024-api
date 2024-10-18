@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id('user_id');
-            $table->string('full_name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->string('gender');
-            $table->rememberToken();
+        Schema::create('user_alerts', function (Blueprint $table) {
+            $table->id('user_alert_id');
+            $table->foreignId('user_id')->constrained('users','user_id')->onDelete('cascade');
+            $table->foreignId('alert_id')->constrained('alerts','alert_id')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('user_alerts');
     }
 };

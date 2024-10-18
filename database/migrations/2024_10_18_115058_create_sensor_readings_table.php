@@ -12,7 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('sensor_readings', function (Blueprint $table) {
-            $table->id();
+            $table->id('reading_id');
+            $table->foreignId('machine_id')->constrained('machines', 'machine_id')->onDelete('cascade');
+            $table->json('sensor_data');
+            $table->dateTime('reading_time');
             $table->timestamps();
         });
     }

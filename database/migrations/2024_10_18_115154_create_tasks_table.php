@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('machines', function (Blueprint $table) {
-            $table->id();
+        Schema::create('tasks', function (Blueprint $table) {
+            $table->id('task_id');
+            $table->string('task_description');
+            $table->dateTime('due_date');
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -22,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('machines');
+        Schema::dropIfExists('tasks');
     }
 };
