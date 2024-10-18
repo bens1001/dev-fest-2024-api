@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('machines', function (Blueprint $table) {
             $table->id('machine_id');
+            $table->string('machine_name');
             $table->string('machine_type');
             $table->string('status');
             $table->dateTime('last_maintenance');
+            $table->datetime('first_usage');
             $table->timestamps();
         });
     }

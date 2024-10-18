@@ -11,8 +11,10 @@ class Machine extends Model
 
     protected $fillable = [
         'machine_type',
+        'machine_name',
         'status',
         'last_maintenance',
+        'first_usage',
     ];
 
     public function sensorReadings()

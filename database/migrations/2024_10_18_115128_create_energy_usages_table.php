@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('energy_usage', function (Blueprint $table) {
+        Schema::create('energy_usages', function (Blueprint $table) {
             $table->id('usage_id');
             $table->foreignId('machine_id')->constrained('machines', 'machine_id')->onDelete('cascade');
             $table->float('energy_consumed');

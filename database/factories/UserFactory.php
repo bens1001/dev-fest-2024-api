@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+use App\Models\User;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -16,6 +16,7 @@ class UserFactory extends Factory
      */
     protected static ?string $password;
 
+    protected $model = User::class;
     /**
      * Define the model's default state.
      *
@@ -24,21 +25,29 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'full_name' => fake()->name(),
+            'gender' => fake()->randomElement(['male', 'female']),
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'remember_token' => fake()->regexify('[A-Za-z0-9]{20}'),
         ];
     }
 
     /**
-     * Indicate that the model's email address should be unverified.
+     * Create a user and assign a random role.
+     *
+     * @param array $roles
+     * @return User
      */
-    public function unverified(): static
+    public function createWithRandomRole(array $roles = ['admin', 'manager', 'operator'])
     {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-        ]);
+        // Create the user
+        $user = $this->create();
+
+        // Assign a random role to the user after creation
+        $user->assignRole(fake()->randomElement($roles));
+
+        return $user;
     }
+
 }

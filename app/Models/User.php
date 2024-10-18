@@ -50,12 +50,12 @@ class User extends Authenticatable
     }
 
 
-    public function taskUsers()
+    public function tasks()
     {
         return $this->belongsToMany(Task::class, 'task_users');
     }
 
-    public function userAlerts()
+    public function alerts()
     {
         return $this->belongsToMany(Alert::class, 'user_alerts');
     }

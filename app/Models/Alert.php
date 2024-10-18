@@ -20,7 +20,7 @@ class Alert extends Model
         return $this->belongsTo(Machine::class);
     }
 
-    public function userAlerts()
+    public function users()
     {
         return $this->hasMany(UserAlert::class);
     }
