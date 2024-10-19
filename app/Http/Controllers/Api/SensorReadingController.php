@@ -55,7 +55,7 @@ class SensorReadingController extends Controller
             $machineType = $machineTypeMapping[$machineIdFromData];
 
             // Fetch the corresponding machine ID from the database
-            $machineIdFromTable = Machine::where('type', $machineType)->value('id');
+            $machineIdFromTable = Machine::where('machine_type', $machineType)->value('id');
 
             // Create the sensor reading
             SensorReading::create([
