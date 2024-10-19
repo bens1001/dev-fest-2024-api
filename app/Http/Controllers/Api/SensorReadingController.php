@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\SensorReading;
 use App\Http\Resources\SensorReadingResource;
 use Illuminate\Support\Facades\DB;
+use App\Models\Machine;
 
 /**
  * @group Sensor Reading
@@ -15,6 +16,66 @@ use Illuminate\Support\Facades\DB;
  */
 class SensorReadingController extends Controller
 {
+    /**
+     * Store sensor readings received from a webhook.
+     *
+     * This endpoint receives sensor data from a specified machine and stores it in the database.
+     *
+     * @response 201 {
+     *   "message": "Sensor readings saved successfully"
+     * }
+     * @response 400 {
+     *   "error": "Failed to save sensor readings: <error_message>"
+     * }
+     * @response 500 {
+     *   "error": "Failed to save sensor readings: <error_message>"
+     * }
+     */
+    public function receiveData(Request $request)
+    {
+        DB::beginTransaction(); // Start the transaction
+
+        try {
+            $data = $request->json()->all(); // Get the JSON data from the request
+
+            // Extract the machine_id from the received data
+            $machineIdFromData = $data['machine_id'];
+
+            // Define a mapping of machine IDs to their corresponding types
+            $machineTypeMapping = [
+                'stamping_press_001' => 'Stamping Press',
+                'welding_robot_006' => 'Welding Robot',
+                'painting_robot_002' => 'Painting Robot',
+                'agv_003' => 'Automated Guided Vehicle',
+                'cnc_milling_004' => 'CNC Machine',
+                'leak_test_005' => 'Leak Test Machine',
+            ];
+
+            // Get the machine type based on the machine_id from the data
+            $machineType = $machineTypeMapping[$machineIdFromData];
+
+            // Fetch the corresponding machine ID from the database
+            $machineIdFromTable = Machine::where('type', $machineType)->value('id');
+
+            // Create the sensor reading
+            SensorReading::create([
+                'machine_id' => $machineIdFromTable,
+                'sensor_data' => json_encode($data),
+                'reading_time' => now(),
+            ]);
+
+            DB::commit();
+            return response()->json(['message' => 'Sensor readings saved successfully'], 201);
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return response()->json(['error' => 'Failed to save sensor readings: ' . $e->getMessage()], 500);
+        }
+    }
+
+
+
+
     /**
      * List Sensor Readings
      *

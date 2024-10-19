@@ -13,6 +13,8 @@ use App\Http\Controllers\Api\{
     DefectController
 };
 
+Route::post('/webhook', [SensorReadingController::class, 'receiveData']);
+
 // Authentication routes
 Route::prefix('auth')->group(function () {
     Route::post('login', [AuthController::class, 'login'])
