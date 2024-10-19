@@ -14,6 +14,13 @@ class DefectResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'machine_id' => $this->machine->id,
+            'machine_name' => $this->machine->machine_name,
+            'machine_type' => $this->machine->machine_type,
+            'defect_type' => $this->defect_type,
+            'defect_time' => $this->defect_time,
+        ];
     }
 }

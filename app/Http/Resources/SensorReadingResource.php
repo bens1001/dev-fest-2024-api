@@ -14,6 +14,13 @@ class SensorReadingResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'machine_id' => $this->machine->id,
+            'machine_name' => $this->machine->machine_name,
+            'machine_type' => $this->machine->machine_type,
+            'sensor_data' => $this->sensor_data,
+            'reading_time' => $this->reading_time,
+        ];
     }
 }

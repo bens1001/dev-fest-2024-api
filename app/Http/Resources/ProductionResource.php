@@ -14,6 +14,15 @@ class ProductionResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'machine_id' => $this->machine->id,
+            'machine_name' => $this->machine->machine_name,
+            'machine_type' => $this->machine->machine_type,
+            'start_time' => $this->start_time,
+            'end_time' => $this->end_time,
+            'output_quantity' => $this->output_quantity,
+            'target_quantity' => $this->target_quantity,
+        ];
     }
 }

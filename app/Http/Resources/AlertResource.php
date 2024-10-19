@@ -14,6 +14,13 @@ class AlertResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'machine_id' => $this->machine->id,
+            'machine_name' => $this->machine->machine_name,
+            'machine_type' => $this->machine->machine_type,
+            'alert_message' => $this->alert_message,
+            'alert_time' => $this->alert_time,
+        ];
     }
 }
