@@ -18,6 +18,37 @@ use Illuminate\Support\Facades\DB;
  */
 class UserController extends Controller
 {
+    /**
+     * List Users
+     *
+     * Retrieve a paginated list of users, with optional filtering by gender.
+     *
+     * Before using this endpoint:
+     * - Ensure users are available.
+     *
+     * After using this endpoint:
+     * - You will receive a paginated list of users, optionally filtered by gender.
+     *
+     * @apiResourceCollection App\Http\Resources\UserResource
+     * @apiResourceModel App\Models\User paginate=10
+     *
+     * @response 200 {
+     *   "data": [
+     *     {
+     *       "id": 1,
+     *       "name": "John Doe",
+     *       "email": "john@example.com",
+     *       "gender": "male",
+     *       "created_at": "2024-10-18T10:00:00.000000Z",
+     *       "updated_at": "2024-10-18T10:00:00.000000Z"
+     *     },
+     *     ...
+     *   ],
+     *   "links": {...},
+     *   "meta": {...}
+     * }
+     * @response 404 {"message": "Not found"}
+     */
     public function index(Request $request)
     {
         try {
@@ -37,6 +68,30 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * Show a User
+     *
+     * Retrieve details of a specific user by ID.
+     *
+     * Before using this endpoint:
+     * - Ensure that the user exists.
+     *
+     * After using this endpoint:
+     * - You will receive the details of the selected user.
+     *
+     * @apiResource App\Http\Resources\UserResource
+     * @apiResourceModel App\Models\User
+     *
+     * @response 200 {
+     *   "id": 1,
+     *   "name": "John Doe",
+     *   "email": "john@example.com",
+     *   "gender": "male",
+     *   "created_at": "2024-10-18T10:00:00.000000Z",
+     *   "updated_at": "2024-10-18T10:00:00.000000Z"
+     * }
+     * @response 404 {"message": "Not found"}
+     */
     public function show(int $user_id)
     {
         try {
@@ -47,17 +102,36 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * Store a User
+     *
+     * Create a new user with the provided details.
+     *
+     * Before using this endpoint:
+     * - Ensure the request data is valid.
+     *
+     * After using this endpoint:
+     * - The new user will be created and returned.
+     *
+     * @apiResource App\Http\Resources\UserResource
+     * @apiResourceModel App\Models\User
+     *
+     * @response 201 {
+     *   "id": 1,
+     *   "name": "John Doe",
+     *   "email": "john@example.com",
+     *   "gender": "male",
+     *   "created_at": "2024-10-18T10:00:00.000000Z",
+     *   "updated_at": "2024-10-18T10:00:00.000000Z"
+     * }
+     * @response 404 {"message": "Not found"}
+     */
     public function store(StoreUserRequest $request)
     {
         try {
             DB::beginTransaction();
 
-            $user = User::create([
-                'full_name' => $request->validated()['full_name'],
-                'password' => bcrypt($request->validated()['password']),
-                'gender' => $request->validated()['gender'],
-                'email' => $request->validated()['email'],
-            ]);
+            $user = User::create($request->validated());
 
             DB::commit();
             return new UserResource($user);
@@ -67,6 +141,30 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * Update a User
+     *
+     * Update the details of an existing user.
+     *
+     * Before using this endpoint:
+     * - Ensure that the user exists.
+     *
+     * After using this endpoint:
+     * - The user's details will be updated with the provided data.
+     *
+     * @apiResource App\Http\Resources\UserResource
+     * @apiResourceModel App\Models\User
+     *
+     * @response 200 {
+     *   "id": 1,
+     *   "name": "Updated John Doe",
+     *   "email": "john.updated@example.com",
+     *   "gender": "male",
+     *   "created_at": "2024-10-18T10:00:00.000000Z",
+     *   "updated_at": "2024-10-18T10:00:00.000000Z"
+     * }
+     * @response 404 {"message": "Not found"}
+     */
     public function update(UpdateUserRequest $request, int $user_id)
     {
         try {
@@ -83,6 +181,20 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * Delete a User
+     *
+     * Permanently remove a user from the system.
+     *
+     * Before using this endpoint:
+     * - Ensure that the user exists.
+     *
+     * After using this endpoint:
+     * - The user will be deleted from the system.
+     *
+     * @response 204 {"message": "User deleted"}
+     * @response 404 {"message": "Not found"}
+     */
     public function destroy(int $user_id)
     {
         try {
@@ -92,7 +204,7 @@ class UserController extends Controller
             $user->delete();
 
             DB::commit();
-            return response()->json(null, 204);
+            return response()->json(['message' => 'Defect deleted'], 204);
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json(['message' => 'Not found'], 404);

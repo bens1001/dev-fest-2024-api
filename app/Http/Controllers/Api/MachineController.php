@@ -17,6 +17,37 @@ use Illuminate\Support\Facades\DB;
  */
 class MachineController extends Controller
 {
+    /**
+     * List Machines
+     *
+     * Retrieve a paginated list of machines, with optional filtering by status and machine type.
+     *
+     * Before using this endpoint:
+     * - Ensure machines have been added to the system.
+     *
+     * After using this endpoint:
+     * - You will get a list of machines, optionally filtered by status or machine type.
+     *
+     * @apiResourceCollection App\Http\Resources\MachineResource
+     * @apiResourceModel App\Models\Machine paginate=10
+     *
+     * @response 200 {
+     *   "data": [
+     *     {
+     *       "id": 1,
+     *       "name": "Machine A",
+     *       "status": "active",
+     *       "machine_type": "type1",
+     *       "created_at": "2024-10-18T10:00:00.000000Z",
+     *       "updated_at": "2024-10-18T10:00:00.000000Z"
+     *     },
+     *     ...
+     *   ],
+     *   "links": {...},
+     *   "meta": {...}
+     * }
+     * @response 404 {"message": "Not found"}
+     */
     public function index(Request $request)
     {
         try {
@@ -38,6 +69,30 @@ class MachineController extends Controller
         }
     }
 
+    /**
+     * Show a Machine
+     *
+     * Retrieve details of a specific machine by ID.
+     *
+     * Before using this endpoint:
+     * - Ensure that the machine exists in the system.
+     *
+     * After using this endpoint:
+     * - You will receive detailed information about the selected machine.
+     *
+     * @apiResource App\Http\Resources\MachineResource
+     * @apiResourceModel App\Models\Machine
+     *
+     * @response 200 {
+     *   "id": 1,
+     *   "name": "Machine A",
+     *   "status": "active",
+     *   "machine_type": "type1",
+     *   "created_at": "2024-10-18T10:00:00.000000Z",
+     *   "updated_at": "2024-10-18T10:00:00.000000Z"
+     * }
+     * @response 404 {"message": "Not found"}
+     */
     public function show(int $machine_id)
     {
         try {
@@ -48,6 +103,30 @@ class MachineController extends Controller
         }
     }
 
+    /**
+     * Create a New Machine
+     *
+     * Add a new machine to the system.
+     *
+     * Before using this endpoint:
+     * - Provide necessary machine details (name, status, machine type, etc.).
+     *
+     * After using this endpoint:
+     * - A new machine will be created in the system.
+     *
+     * @apiResource App\Http\Resources\MachineResource
+     * @apiResourceModel App\Models\Machine
+     *
+     * @response 201 {
+     *   "id": 1,
+     *   "name": "Machine A",
+     *   "status": "active",
+     *   "machine_type": "type1",
+     *   "created_at": "2024-10-18T10:00:00.000000Z",
+     *   "updated_at": "2024-10-18T10:00:00.000000Z"
+     * }
+     * @response 404 {"message": "Not found"}
+     */
     public function store(StoreMachineRequest $request)
     {
         try {
@@ -63,6 +142,31 @@ class MachineController extends Controller
         }
     }
 
+    /**
+     * Update an Existing Machine
+     *
+     * Modify the details of an existing machine by its ID.
+     *
+     * Before using this endpoint:
+     * - Ensure that the machine exists.
+     * - Provide updated machine details.
+     *
+     * After using this endpoint:
+     * - The machine's details will be updated in the system.
+     *
+     * @apiResource App\Http\Resources\MachineResource
+     * @apiResourceModel App\Models\Machine
+     *
+     * @response 200 {
+     *   "id": 1,
+     *   "name": "Machine A",
+     *   "status": "inactive",
+     *   "machine_type": "type2",
+     *   "created_at": "2024-10-18T10:00:00.000000Z",
+     *   "updated_at": "2024-10-18T10:10:00.000000Z"
+     * }
+     * @response 404 {"message": "Not found"}
+     */
     public function update(UpdateMachineRequest $request, int $machine_id)
     {
         try {
@@ -79,6 +183,20 @@ class MachineController extends Controller
         }
     }
 
+    /**
+     * Delete a Machine
+     *
+     * Permanently remove a machine from the system.
+     *
+     * Before using this endpoint:
+     * - Ensure that the machine exists.
+     *
+     * After using this endpoint:
+     * - The machine will be removed from the system.
+     *
+     * @response 204 {"message": "Machine deleted"}
+     * @response 404 {"message": "Not found"}
+     */
     public function destroy(int $machine_id)
     {
         try {
@@ -88,7 +206,7 @@ class MachineController extends Controller
             $machine->delete();
 
             DB::commit();
-            return response()->json(null, 204);
+            return response()->json(['message' => 'Defect deleted'], 204);
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json(['message' => 'Not found'], 404);

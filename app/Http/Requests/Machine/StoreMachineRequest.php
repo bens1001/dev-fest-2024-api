@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Machine;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreMachineRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class StoreMachineRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,11 @@ class StoreMachineRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'machine_type' => ['required','string',Rule::in(['Welding Robot', 'Stamping Press', 'Painting Robot', 'Automated Guided Vehicle', 'CNC Machine', 'Leak Test Machine']),],
+            'machine_name' => 'required|string',
+            'status' => ['required','string',Rule::in(['running', 'idle', 'maintenance']),],
+            'last_maintenance' => 'required|date|before:now',
+            'first_usage' => 'required|date|before:now',
         ];
     }
 }

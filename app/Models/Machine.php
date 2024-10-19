@@ -36,4 +36,9 @@ class Machine extends Model
     {
         return $this->hasMany(Alert::class);
     }
+
+    public function defects()
+    {
+        return $this->hasMany(Defect::class);
+    }
 }

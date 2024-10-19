@@ -22,10 +22,9 @@ class UpdateEnergyUsageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'machine_id' => 'sometimes|exists:machines,machine_id',
             'energy_consumed' => 'sometimes|numeric',
-            'start_shift_time' => 'sometimes|date',
-            'end_shift_time' => 'sometimes|date',
+            'start_shift_time' => 'sometimes|date|before:end_shift_time',
+            'end_shift_time' => 'sometimes|date|after:start_shift_time',
         ];
     }
 }

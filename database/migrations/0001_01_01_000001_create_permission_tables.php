@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 return new class extends Migration
 {
@@ -114,6 +116,60 @@ return new class extends Migration
 
             $table->primary([$pivotPermission, $pivotRole], 'role_has_permissions_permission_id_role_id_primary');
         });
+
+        // Create default permissions
+        $permissions = [
+            'view machines',
+            'create machines',
+            'edit machines',
+            'delete machines',
+            'view alerts',
+            'delete alerts',
+            'view tasks',
+            'edit tasks',
+            'delete tasks',
+            'view production',
+            'create production',
+            'edit production',
+            'delete production',
+            'view sensor_readings',
+            'delete sensor_readings',
+            'view energy_usage',
+            'create energy_usage',
+            'edit energy_usage',
+            'delete energy_usage',
+            'view users',
+            'create users',
+            'edit users',
+            'delete users',
+            'view roles',
+            'create roles',
+            'edit roles',
+            'delete roles',
+            'view permissions',
+            'create permissions',
+            'edit permissions',
+            'delete permissions',
+            'view defects',
+            'create defects',
+            'edit defects',
+            'delete defects',
+            'login',
+        ];
+
+        foreach ($permissions as $permission) {
+            Permission::create(['name' => $permission, 'guard_name' => 'web']);
+        }
+
+        // Create default roles
+        $roleOperator = Role::create(['name' => 'operator', 'guard_name' => 'web']);
+        $roleManager = Role::create(['name' => 'manager', 'guard_name' => 'web']);
+        $roleAdmin = Role::create(['name' => 'admin', 'guard_name' => 'web']);
+
+        // Assign permissions to roles
+        $roleOperator->givePermissionTo(['view machines', 'view alerts', 'view production', 'view sensor_readings', 'view energy_usage', 'view defects', 'login']);
+        $roleManager->givePermissionTo(['view machines', 'view alerts', 'view production', 'create production', 'edit production', 'view sensor_readings', 'view energy_usage', 'create energy_usage', 'create defects', 'view users', 'create users', 'edit users', 'delete users', 'login']);
+        $roleAdmin->givePermissionTo(Permission::all());
 
         app('cache')
             ->store(config('permission.cache.store') != 'default' ? config('permission.cache.store') : null)

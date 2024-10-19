@@ -11,7 +11,7 @@ class StoreProductionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class StoreProductionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'start_time' => 'required|date|before:end_time',
+            'end_time' => 'required|date|after:start_time',
+            'output_quantity' => 'required|integer',
+            'target_quantity' => 'required|integer|gte:output_quantity',
         ];
     }
 }

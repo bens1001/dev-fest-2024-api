@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\User;
+use Spatie\Permission\Models\Role;
 
 return new class extends Migration
 {
@@ -36,6 +38,15 @@ return new class extends Migration
             $table->integer('last_activity')->index();
         });
 
+        $user = User::create([
+            'full_name' => 'Admin',
+            'email' => env('DB_USERNAME').'@company.dz',
+            'password' => env('DB_PASSWORD'),
+            'gender' => 'male',
+        ]);
+
+        $role = Role::findByName('admin');
+        $user->assignRole($role);
     }
 
     /**

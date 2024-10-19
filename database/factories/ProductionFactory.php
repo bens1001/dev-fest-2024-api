@@ -24,7 +24,7 @@ class ProductionFactory extends Factory
             'start_time' => fake()->dateTimeBetween('-1 week', 'now'),
             'end_time' => fake()->dateTimeBetween('now', '+1 week'),
             'output_quantity' => fake()->numberBetween(1, 1000),
-            'defects_quantity' => fake()->numberBetween(0, 100),
+            'target_quantity' => fake()->numberBetween(1, 1000),
         ];
     }
 }

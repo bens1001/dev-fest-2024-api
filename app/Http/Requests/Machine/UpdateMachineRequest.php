@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Machine;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateMachineRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class UpdateMachineRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,10 @@ class UpdateMachineRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'machine_name' => 'sometimes|string',
+            'status' => ['sometimes', 'string', Rule::in(['running', 'idle', 'maintenance']),],
+            'last_maintenance' => 'sometimes|date|before:now',
+            'first_usage' => 'sometimes|date|before:now',
         ];
     }
 }

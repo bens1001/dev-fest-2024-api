@@ -16,6 +16,23 @@ use Illuminate\Support\Facades\DB;
  */
 class AuthController extends Controller
 {
+    /**
+     * User Login
+     *
+     * Authenticate a user and generate a new authentication token.
+     *
+     * Before using this endpoint:
+     * - Ensure the user is registered in the system.
+     * - Provide valid email and password credentials.
+     *
+     * After using this endpoint:
+     * - A token will be generated for the user, which can be used for authenticated requests.
+     *
+     * @response 200 {
+     *   "token": "1|abc123tokenxyz"
+     * }
+     * @response 401 {"message": "Unauthorized"}
+     */
     public function login(LoginRequest $request) // Using a custom request for validation
     {
         $credentials = $request->validated();
@@ -30,6 +47,20 @@ class AuthController extends Controller
         return response()->json(['token' => $token], 200);
     }
 
+    /**
+     * User Logout
+     *
+     * Log out the user and delete their active tokens.
+     *
+     * Before using this endpoint:
+     * - Ensure the user is logged in.
+     *
+     * After using this endpoint:
+     * - The user's tokens will be revoked, logging them out.
+     *
+     * @response 200 {"message": "Logged out"}
+     * @response 404 {"message": "Not found"}
+     */
     public function logout(int $user_id)
     {
         try {
@@ -47,6 +78,22 @@ class AuthController extends Controller
         }
     }
 
+    /**
+     * Change User Password
+     *
+     * Update the user's password after verifying the current password.
+     *
+     * Before using this endpoint:
+     * - Provide the user's current password for verification.
+     * - Provide the new password.
+     *
+     * After using this endpoint:
+     * - The user's password will be updated to the new one.
+     *
+     * @response 200 {"message": "Password changed successfully"}
+     * @response 400 {"message": "Current password is incorrect"}
+     * @response 404 {"message": "Not found"}
+     */
     public function changePassword(ChangePasswordRequest $request)
     {
         try {

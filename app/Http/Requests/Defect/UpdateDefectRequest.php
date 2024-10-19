@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Requests\Alert;
+namespace App\Http\Requests\Defect;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateAlertRequest extends FormRequest
+class UpdateDefectRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class UpdateAlertRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'defect_type' => 'required|string',
+            'defect_time' => 'required|date|before:now',
         ];
     }
 }

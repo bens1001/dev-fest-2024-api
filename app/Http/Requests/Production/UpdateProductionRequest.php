@@ -11,7 +11,7 @@ class UpdateProductionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class UpdateProductionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'start_time' => 'sometimes|date|before:end_time',
+            'end_time' => 'sometimes|date|after:start_time',
+            'output_quantity' => 'sometimes|integer',
+            'target_quantity' => 'sometimes|integer|gte:output_quantity',
         ];
     }
 }

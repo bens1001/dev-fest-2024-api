@@ -8,6 +8,7 @@ use App\Models\Production;
 use App\Http\Resources\ProductionResource;
 use App\Http\Requests\Production\StoreProductionRequest;
 use App\Http\Requests\Production\UpdateProductionRequest;
+use App\Models\Machine;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -17,6 +18,37 @@ use Illuminate\Support\Facades\DB;
  */
 class ProductionController extends Controller
 {
+    /**
+     * List Productions
+     *
+     * Retrieve a paginated list of production records, with optional filtering by machine ID.
+     *
+     * Before using this endpoint:
+     * - Ensure productions have been recorded.
+     *
+     * After using this endpoint:
+     * - You will receive a list of production records, optionally filtered by machine ID.
+     *
+     * @apiResourceCollection App\Http\Resources\ProductionResource
+     * @apiResourceModel App\Models\Production paginate=10
+     *
+     * @response 200 {
+     *   "data": [
+     *     {
+     *       "id": 1,
+     *       "machine_id": 5,
+     *       "production_date": "2024-10-18",
+     *       "quantity": 1000,
+     *       "created_at": "2024-10-18T10:00:00.000000Z",
+     *       "updated_at": "2024-10-18T10:00:00.000000Z"
+     *     },
+     *     ...
+     *   ],
+     *   "links": {...},
+     *   "meta": {...}
+     * }
+     * @response 404 {"message": "Not found"}
+     */
     public function index(Request $request)
     {
         try {
@@ -36,6 +68,30 @@ class ProductionController extends Controller
         }
     }
 
+    /**
+     * Show a Production Record
+     *
+     * Retrieve details of a specific production record by ID.
+     *
+     * Before using this endpoint:
+     * - Ensure that the production record exists.
+     *
+     * After using this endpoint:
+     * - You will receive detailed information about the selected production record.
+     *
+     * @apiResource App\Http\Resources\ProductionResource
+     * @apiResourceModel App\Models\Production
+     *
+     * @response 200 {
+     *   "id": 1,
+     *   "machine_id": 5,
+     *   "production_date": "2024-10-18",
+     *   "quantity": 1000,
+     *   "created_at": "2024-10-18T10:00:00.000000Z",
+     *   "updated_at": "2024-10-18T10:00:00.000000Z"
+     * }
+     * @response 404 {"message": "Not found"}
+     */
     public function show(int $production_id)
     {
         try {
@@ -46,12 +102,44 @@ class ProductionController extends Controller
         }
     }
 
-    public function store(StoreProductionRequest $request)
+    /**
+     * Create a New Production Record
+     *
+     * Add a new production record to the system.
+     *
+     * Before using this endpoint:
+     * - Provide necessary details (machine ID, production date, quantity, etc.).
+     * - The machine ID must correspond to an existing machine.
+     *
+     * After using this endpoint:
+     * - A new production record will be created.
+     *
+     * @apiResource App\Http\Resources\ProductionResource
+     * @apiResourceModel App\Models\Production
+     *
+     * @response 201 {
+     *   "id": 1,
+     *   "machine_id": 5,
+     *   "production_date": "2024-10-18",
+     *   "quantity": 1000,
+     *   "created_at": "2024-10-18T10:00:00.000000Z",
+     *   "updated_at": "2024-10-18T10:00:00.000000Z"
+     * }
+     * @response 404 {"message": "Not found"}
+     */
+    public function store(StoreProductionRequest $request, int $machine_id)
     {
         try {
             DB::beginTransaction();
 
-            $production = Production::create($request->validated());
+            Machine::findOrFail($machine_id);
+
+            $production = Production::create(
+                $request->validated()
+                    + [
+                        'machine_id' => $machine_id,
+                    ]
+            );
 
             DB::commit();
             return new ProductionResource($production);
@@ -61,6 +149,31 @@ class ProductionController extends Controller
         }
     }
 
+    /**
+     * Update an Existing Production Record
+     *
+     * Modify the details of an existing production record by its ID.
+     *
+     * Before using this endpoint:
+     * - Ensure that the production record exists.
+     * - Provide updated production details.
+     *
+     * After using this endpoint:
+     * - The production record's details will be updated in the system.
+     *
+     * @apiResource App\Http\Resources\ProductionResource
+     * @apiResourceModel App\Models\Production
+     *
+     * @response 200 {
+     *   "id": 1,
+     *   "machine_id": 5,
+     *   "production_date": "2024-10-18",
+     *   "quantity": 1200,
+     *   "created_at": "2024-10-18T10:00:00.000000Z",
+     *   "updated_at": "2024-10-18T10:10:00.000000Z"
+     * }
+     * @response 404 {"message": "Not found"}
+     */
     public function update(UpdateProductionRequest $request, int $production_id)
     {
         try {
@@ -77,6 +190,20 @@ class ProductionController extends Controller
         }
     }
 
+    /**
+     * Delete a Production Record
+     *
+     * Permanently remove a production record from the system.
+     *
+     * Before using this endpoint:
+     * - Ensure that the production record exists.
+     *
+     * After using this endpoint:
+     * - The production record will be removed from the system.
+     *
+     * @response 204 {"message": "Production deleted"}
+     * @response 404 {"message": "Not found"}
+     */
     public function destroy(int $production_id)
     {
         try {
@@ -86,7 +213,7 @@ class ProductionController extends Controller
             $production->delete();
 
             DB::commit();
-            return response()->json(null, 204);
+            return response()->json(['message' => 'Defect deleted'], 204);
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json(['message' => 'Not found'], 404);

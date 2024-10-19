@@ -11,7 +11,7 @@ class StoreEnergyUsageRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class StoreEnergyUsageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'energy_consumed' => 'required|numeric',
+            'start_shift_time' => 'required|date',
+            'end_shift_time' => 'required|date|after:start_shift_time',
         ];
     }
 }

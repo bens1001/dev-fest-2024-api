@@ -5,16 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Production extends Model
+class Defect extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'machine_id',
-        'start_time',
-        'end_time',
-        'output_quantity',
-        'target_quantity',
+        'defect_type',
+        'defect_time',
     ];
 
     public function machine()

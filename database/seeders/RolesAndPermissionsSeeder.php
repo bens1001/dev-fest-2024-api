@@ -20,7 +20,6 @@ class RolesAndPermissionsSeeder extends Seeder
             'edit machines',
             'delete machines',
             'view alerts',
-            'edit alerts',
             'delete alerts',
             'view tasks',
             'edit tasks',
@@ -47,6 +46,10 @@ class RolesAndPermissionsSeeder extends Seeder
             'create permissions',
             'edit permissions',
             'delete permissions',
+            'view defects',
+            'create defects',
+            'edit defects',
+            'delete defects',
             'login',
         ];
 
@@ -56,10 +59,33 @@ class RolesAndPermissionsSeeder extends Seeder
 
         // Create roles and assign permissions
         $roleOperator = Role::create(['name' => 'operator']);
-        $roleOperator->givePermissionTo([]);
+        $roleOperator->givePermissionTo([
+            'view machines',
+            'view alerts',
+            'view production',
+            'view sensor_readings',
+            'view energy_usage',
+            'view defects',
+            'login'
+        ]);
 
         $roleManager = Role::create(['name' => 'manager']);
-        $roleManager->givePermissionTo([]);
+        $roleManager->givePermissionTo([
+            'view machines',
+            'view alerts',
+            'view production',
+            'create production',
+            'edit production',
+            'view sensor_readings',
+            'view energy_usage',
+            'create energy_usage',
+            'create defects',
+            'view users',
+            'create users',
+            'edit users',
+            'delete users',
+            'login'
+        ]);
 
         $roleAdmin = Role::create(['name' => 'admin']);
         $roleAdmin->givePermissionTo(Permission::all());
