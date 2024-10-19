@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Resources\DefectResource;
 use App\Http\Requests\Defect\StoreDefectRequest;
 use App\Http\Requests\Defect\UpdateDefectRequest;
+use App\Models\Alert;
+use App\Models\Task;
 
 /**
  * @group Defect
@@ -124,20 +126,35 @@ class DefectController extends Controller
         try {
             DB::beginTransaction();
 
+            // Ensure the machine exists
             Machine::findOrFail($machine_id);
 
+            // Create the defect
             $defect = Defect::create(
-                $request->validated()
-                    + [
-                        'machine_id' => $machine_id,
-                    ]
+                $request->validated() + [
+                    'machine_id' => $machine_id,
+                ]
             );
+
+            // Create an alert for the defect
+            $alert = Alert::create([
+                'machine_id' => $machine_id,
+                'alert_message' => 'New defect of type ' . $defect->defect_type . '.',
+                'alert_time' => now(),
+            ]);
+
+            // Create a task to fix the defect
+            Task::create([
+                'machine_id' => $machine_id,
+                'task_description' => 'Fix the defect of type: ' . $defect->defect_type,
+                'status' => 'todo',
+            ]);
 
             DB::commit();
             return new DefectResource($defect);
         } catch (\Exception $e) {
             DB::rollback();
-            return response()->json(['message' => 'Not found'], 404);
+            return response()->json(['message' => 'Not found or an error occurred: ' . $e->getMessage()], 404);
         }
     }
 

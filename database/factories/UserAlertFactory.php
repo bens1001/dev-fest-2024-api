@@ -19,8 +19,8 @@ class UserAlertFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => fake()->randomElement(User::pluck('user_id')),
-            'alert_id' => fake()->randomElement(Alert::pluck('alert_id'))
+            'user_id' => fake()->randomElement(User::pluck('id')),
+            'alert_id' => fake()->randomElement(Alert::pluck('id'))
         ];
     }
 }
