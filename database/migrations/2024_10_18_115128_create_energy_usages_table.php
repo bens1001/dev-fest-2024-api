@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('energy_usages', function (Blueprint $table) {
-            $table->id('usage_id');
-            $table->foreignId('machine_id')->constrained('machines', 'machine_id')->onDelete('cascade');
+            $table->id();
+            $table->foreignId('machine_id')->constrained('machines')->onDelete('cascade');
             $table->float('energy_consumed');
             $table->dateTime('start_shift_time');
             $table->dateTime('end_shift_time');

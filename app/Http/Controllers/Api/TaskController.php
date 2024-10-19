@@ -114,6 +114,7 @@ class TaskController extends Controller
      *
      * @response 200 {
      *   "id": 1,
+     *   
      *   "title": "Updated Task",
      *   "status": "completed",
      *   "created_at": "2024-10-18T10:00:00.000000Z",
@@ -148,7 +149,7 @@ class TaskController extends Controller
      * After using this endpoint:
      * - The task will be deleted from the system.
      *
-     * @response 204 {"message": "Task deleted"}
+     * @response 200 {"message": "Task deleted"}
      * @response 404 {"message": "Not found"}
      */
     public function destroy(int $task_id)
@@ -160,7 +161,7 @@ class TaskController extends Controller
             $task->delete();
 
             DB::commit();
-            return response()->json(['message' => 'Defect deleted'], 204);
+            return response()->json(['message' => 'Task deleted'], 200);
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json(['message' => 'Not found'], 404);

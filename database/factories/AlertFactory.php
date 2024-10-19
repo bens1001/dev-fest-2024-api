@@ -20,7 +20,7 @@ class AlertFactory extends Factory
     public function definition(): array
     {
         return [
-            'machine_id' => fake()->randomElement(Machine::pluck('machine_id')),
+            'machine_id' => fake()->randomElement(Machine::pluck('id')),
             'alert_message' => fake()->sentence(),
             'alert_time' => fake()->dateTime(),
         ];

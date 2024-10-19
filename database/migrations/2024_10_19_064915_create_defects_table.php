@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('defects', function (Blueprint $table) {
-            $table->id('defect_id');
-            $table->foreignId('machine_id')->constrained('machines', 'machine_id')->onDelete('cascade');
+            $table->id();
+            $table->foreignId('machine_id')->constrained('machines')->onDelete('cascade');
             $table->string('defect_type');
             $table->dateTime('defect_time');
             $table->timestamps();

@@ -108,7 +108,7 @@ class SensorReadingController extends Controller
      * After using this endpoint:
      * - The sensor reading will be deleted from the system.
      *
-     * @response 204 {"message": "Sensor reading deleted"}
+     * @response 200 {"message": "Sensor reading deleted"}
      * @response 404 {"message": "Not found"}
      */
     public function destroy(int $sensor_reading_id)
@@ -120,7 +120,7 @@ class SensorReadingController extends Controller
             $sensorReading->delete();
 
             DB::commit();
-            return response()->json(['message' => 'Defect deleted'], 204);
+            return response()->json(['message' => 'Sensor Reading deleted'], 200);
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json(['message' => 'Not found'], 404);

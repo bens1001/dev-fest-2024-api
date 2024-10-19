@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('alerts', function (Blueprint $table) {
-            $table->id('alert_id');
-            $table->foreignId('machine_id')->constrained('machines', 'machine_id')->onDelete('cascade');
+            $table->id();
+            $table->foreignId('machine_id')->constrained('machines')->onDelete('cascade');
             $table->string('alert_message');
             $table->dateTime('alert_time');
             $table->timestamps();

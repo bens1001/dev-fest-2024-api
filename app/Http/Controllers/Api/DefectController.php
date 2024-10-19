@@ -192,7 +192,7 @@ class DefectController extends Controller
      * After using this endpoint:
      * - The defect will be removed from the system.
      *
-     * @response 204 {"message": "Defect deleted"}
+     * @response 200 {"message": "Defect deleted"}
      * @response 404 {"message": "Not found"}
      */
     public function destroy(int $defect_id)
@@ -204,7 +204,7 @@ class DefectController extends Controller
             $defect->delete();
 
             DB::commit();
-            return response()->json(['message' => 'Defect deleted'], 204);
+            return response()->json(['message' => 'Defect deleted'], 200);
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json(['message' => 'Not found'], 404);

@@ -192,7 +192,7 @@ class UserController extends Controller
      * After using this endpoint:
      * - The user will be deleted from the system.
      *
-     * @response 204 {"message": "User deleted"}
+     * @response 200 {"message": "User deleted"}
      * @response 404 {"message": "Not found"}
      */
     public function destroy(int $user_id)
@@ -204,7 +204,7 @@ class UserController extends Controller
             $user->delete();
 
             DB::commit();
-            return response()->json(['message' => 'Defect deleted'], 204);
+            return response()->json(['message' => 'User deleted'], 200);
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json(['message' => 'Not found'], 404);

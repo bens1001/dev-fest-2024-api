@@ -25,8 +25,8 @@ class UpdateMachineRequest extends FormRequest
         return [
             'machine_name' => 'sometimes|string',
             'status' => ['sometimes', 'string', Rule::in(['running', 'idle', 'maintenance']),],
-            'last_maintenance' => 'sometimes|date|before:now',
-            'first_usage' => 'sometimes|date|before:now',
+            'last_maintenance' => 'sometimes|date|date_format:Y-m-d H:i:s|before:now|after:first_usage',
+            'first_usage' => 'sometimes|date|date_format:Y-m-d H:i:s|before:now|before:last_maintenance',
         ];
     }
 }

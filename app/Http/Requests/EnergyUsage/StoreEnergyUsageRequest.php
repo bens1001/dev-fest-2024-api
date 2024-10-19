@@ -23,8 +23,8 @@ class StoreEnergyUsageRequest extends FormRequest
     {
         return [
             'energy_consumed' => 'required|numeric',
-            'start_shift_time' => 'required|date',
-            'end_shift_time' => 'required|date|after:start_shift_time',
+            'start_shift_time' => 'required|date|date_format:Y-m-d H:i:s|before:end_shift_time',
+            'end_shift_time' => 'required|date|date_format:Y-m-d H:i:s|after:start_shift_time',
         ];
     }
 }

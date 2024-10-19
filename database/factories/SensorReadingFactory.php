@@ -19,7 +19,7 @@ class SensorReadingFactory extends Factory
         $sensorData = $this->generateSensorData($machine);
 
         return [
-            'machine_id' => $machine->machine_id,
+            'machine_id' => $machine->id,
             'sensor_data' => json_encode($sensorData),
             'reading_time' => $this->faker->dateTime(),
         ];
@@ -40,7 +40,7 @@ class SensorReadingFactory extends Factory
         switch ($machine->machine_type) {
             case 'Welding Robot':
                 return [
-                    'machine_id' => $machine->machine_id,
+                    'machine_id' => $machine->id,
                     'weld_temperature' => $this->faker->numberBetween(1500, 1700),
                     'weld_current' => $this->faker->numberBetween(100, 200),
                     'weld_voltage' => $this->faker->numberBetween(20, 40),
@@ -61,7 +61,7 @@ class SensorReadingFactory extends Factory
 
             case 'Stamping Press':
                 return [
-                    'machine_id' => $machine->machine_id,
+                    'machine_id' => $machine->id,
                     'force_applied' => $this->faker->numberBetween(400, 600),
                     'cycle_time' => $this->faker->numberBetween(10, 15),
                     'temperature' => $this->faker->numberBetween(60, 80),
@@ -78,7 +78,7 @@ class SensorReadingFactory extends Factory
 
             case 'Painting Robot':
                 return [
-                    'machine_id' => $machine->machine_id,
+                    'machine_id' => $machine->id,
                     'spray_pressure' => $this->faker->randomFloat(1, 2, 5),
                     'paint_thickness' => $this->faker->numberBetween(100, 150),
                     'arm_position' => [
@@ -99,7 +99,7 @@ class SensorReadingFactory extends Factory
 
             case 'Automated Guided Vehicle':
                 return [
-                    'machine_id' => $machine->machine_id,
+                    'machine_id' => $machine->id,
                     'location' => [
                         'x' => $this->faker->randomFloat(2, 140, 160),
                         'y' => $this->faker->randomFloat(2, 80, 100),
@@ -119,7 +119,7 @@ class SensorReadingFactory extends Factory
 
             case 'CNC Machine':
                 return [
-                    'machine_id' => $machine->machine_id,
+                    'machine_id' => $machine->id,
                     'spindle_speed' => $this->faker->numberBetween(10000, 15000),
                     'tool_wear_level' => $this->faker->numberBetween(0, 100),
                     'cut_depth' => $this->faker->numberBetween(1, 10),
@@ -135,7 +135,7 @@ class SensorReadingFactory extends Factory
 
             case 'Leak Test Machine':
                 return [
-                    'machine_id' => $machine->machine_id,
+                    'machine_id' => $machine->id,
                     'test_pressure' => $this->faker->randomFloat(1, 1, 10),
                     'pressure_drop' => $this->faker->randomFloat(2, 0, 1),
                     'leak_rate' => $this->faker->randomFloat(2, 0, 5),

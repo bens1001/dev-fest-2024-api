@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('productions', function (Blueprint $table) {
-            $table->id('production_id');
-            $table->foreignId('machine_id')->constrained('machines', 'machine_id')->onDelete('cascade');
+            $table->id();
+            $table->foreignId('machine_id')->constrained('machines')->onDelete('cascade');
             $table->dateTime('start_time');
             $table->dateTime('end_time');
             $table->integer('output_quantity');

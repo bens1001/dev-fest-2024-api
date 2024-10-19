@@ -20,7 +20,7 @@ class EnergyUsageFactory extends Factory
     public function definition(): array
     {
         return [
-            'machine_id' => fake()->randomElement(Machine::pluck('machine_id')),
+            'machine_id' => fake()->randomElement(Machine::pluck('id')),
             'energy_consumed' => fake()->randomFloat(2, 0, 1000),
             'start_shift_time' => fake()->dateTime(),
             'end_shift_time' => fake()->dateTime(),

@@ -194,7 +194,7 @@ class MachineController extends Controller
      * After using this endpoint:
      * - The machine will be removed from the system.
      *
-     * @response 204 {"message": "Machine deleted"}
+     * @response 200 {"message": "Machine deleted"}
      * @response 404 {"message": "Not found"}
      */
     public function destroy(int $machine_id)
@@ -206,7 +206,7 @@ class MachineController extends Controller
             $machine->delete();
 
             DB::commit();
-            return response()->json(['message' => 'Defect deleted'], 204);
+            return response()->json(['message' => 'Machine deleted'], 200);
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json(['message' => 'Not found'], 404);

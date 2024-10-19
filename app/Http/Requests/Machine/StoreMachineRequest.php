@@ -26,8 +26,8 @@ class StoreMachineRequest extends FormRequest
             'machine_type' => ['required','string',Rule::in(['Welding Robot', 'Stamping Press', 'Painting Robot', 'Automated Guided Vehicle', 'CNC Machine', 'Leak Test Machine']),],
             'machine_name' => 'required|string',
             'status' => ['required','string',Rule::in(['running', 'idle', 'maintenance']),],
-            'last_maintenance' => 'required|date|before:now',
-            'first_usage' => 'required|date|before:now',
+            'last_maintenance' => 'required|date|date_format:Y-m-d H:i:s|before:now|after:first_usage',
+            'first_usage' => 'required|date|date_format:Y-m-d H:i:s|before:now|before:last_maintenance',
         ];
     }
 }

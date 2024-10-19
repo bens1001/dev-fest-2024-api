@@ -20,7 +20,7 @@ class ProductionFactory extends Factory
     public function definition(): array
     {
         return [
-            'machine_id' => fake()->randomElement(Machine::pluck('machine_id')),
+            'machine_id' => fake()->randomElement(Machine::pluck('id')),
             'start_time' => fake()->dateTimeBetween('-1 week', 'now'),
             'end_time' => fake()->dateTimeBetween('now', '+1 week'),
             'output_quantity' => fake()->numberBetween(1, 1000),

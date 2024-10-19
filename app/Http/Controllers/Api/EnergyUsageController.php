@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\EnergyUsage;
 use App\Models\Machine;
 use Illuminate\Http\Request;
+use App\Http\Resources\EnergyUsageResource;
 
 /**
  * @group Energy Usage
@@ -52,7 +53,7 @@ class EnergyUsageController extends Controller
         try {
             $energyUsage = EnergyUsage::paginate($request->per_page ?? 10);
 
-            return response()->json($energyUsage, 200);
+            return EnergyUsageResource::collection($energyUsage);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Not found'], 404);
         }
@@ -84,8 +85,8 @@ class EnergyUsageController extends Controller
     public function show(int $energy_usage_id)
     {
         try {
-            $energyUsage = EnergyUsage::findOrFail($energy_usage_id);
-            return response()->json($energyUsage, 200);
+            $usage = EnergyUsage::findOrFail($energy_usage_id);
+            return new EnergyUsageResource($usage);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Not found'], 404);
         }
@@ -115,7 +116,7 @@ class EnergyUsageController extends Controller
      * }
      * @response 404 {"message": "Not found"}
      */
-    public function store(StoreEnergyUsageRequest $request,int $machine_id)
+    public function store(StoreEnergyUsageRequest $request, int $machine_id)
     {
         try {
             DB::beginTransaction();
@@ -130,7 +131,7 @@ class EnergyUsageController extends Controller
             );
 
             DB::commit();
-            return response()->json($usage, 201);
+            return new EnergyUsageResource($usage);
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json(['message' => 'Not found'], 404);
@@ -170,8 +171,7 @@ class EnergyUsageController extends Controller
             $usage->update($request->validated());
 
             DB::commit();
-            return response()->json($usage, 200);
-
+            return new EnergyUsageResource($usage);
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json(['message' => 'Not found'], 404);
@@ -189,7 +189,7 @@ class EnergyUsageController extends Controller
      * After using this endpoint:
      * - The energy usage record will be removed from the system.
      *
-     * @response 204 {"message": "Energy usage record deleted"}
+     * @response 200 {"message": "Energy usage record deleted"}
      * @response 404 {"message": "Not found"}
      */
     public function destroy(int $energy_usage_id)
@@ -201,7 +201,7 @@ class EnergyUsageController extends Controller
             $energyUsage->delete();
 
             DB::commit();
-            return response()->json(['message' => 'Defect deleted'], 204);
+            return response()->json(['message' => 'Energy Usage deleted'], 200);
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json(['message' => 'Not found'], 404);

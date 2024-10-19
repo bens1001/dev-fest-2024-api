@@ -201,7 +201,7 @@ class ProductionController extends Controller
      * After using this endpoint:
      * - The production record will be removed from the system.
      *
-     * @response 204 {"message": "Production deleted"}
+     * @response 200 {"message": "Production deleted"}
      * @response 404 {"message": "Not found"}
      */
     public function destroy(int $production_id)
@@ -213,7 +213,7 @@ class ProductionController extends Controller
             $production->delete();
 
             DB::commit();
-            return response()->json(['message' => 'Defect deleted'], 204);
+            return response()->json(['message' => 'Production deleted'], 200);
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json(['message' => 'Not found'], 404);

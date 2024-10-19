@@ -22,8 +22,8 @@ class UpdateProductionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'start_time' => 'sometimes|date|before:end_time',
-            'end_time' => 'sometimes|date|after:start_time',
+            'start_time' => 'sometimes|date|date_format:Y-m-d H:i:s|before:end_time',
+            'end_time' => 'sometimes|date|date_format:Y-m-d H:i:s|after:start_time',
             'output_quantity' => 'sometimes|integer',
             'target_quantity' => 'sometimes|integer|gte:output_quantity',
         ];

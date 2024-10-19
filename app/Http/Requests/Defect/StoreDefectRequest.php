@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Defect;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreDefectRequest extends FormRequest
@@ -22,8 +23,8 @@ class StoreDefectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'defect_type' => 'required|string',
-            'defect_time' => 'required|date|before:now',
+            'defect_type' => ['required', 'string', Rule::in(['mechanical', 'electrical', 'software'])],
+            'defect_time' => 'required|date|date_format:Y-m-d H:i:s|before:now',
         ];
     }
 }

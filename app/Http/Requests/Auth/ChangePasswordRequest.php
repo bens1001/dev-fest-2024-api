@@ -22,7 +22,7 @@ class ChangePasswordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|string|email|exists:users,email',
+            'email' => 'required|string|email',
             'current_password' => 'required|string',
             'new_password' => 'required|string|confirmed|min:8',
         ];

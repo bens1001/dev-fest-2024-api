@@ -23,8 +23,9 @@ class UpdateTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'user_id' => 'sometimes|integer|exists:users,id',
             'task_description' => 'sometimes|string',
-            'due_date' => 'sometimes|date',
+            'due_date' => 'sometimes|date|date_format:Y-m-d H:i:s',
             'status' => ['sometimes', 'string', Rule::in(['todo', 'pending', 'completed'])],
         ];
     }

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Task;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\User;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Task>
@@ -19,6 +20,7 @@ class TaskFactory extends Factory
     public function definition(): array
     {
         return [
+            'user_id' => fake()->randomElement(User::pluck('user_id')),
             'task_description' => fake()->randomElement(['maintenance', 'battery recharge','production logging','energy usage logging']),
             'due_date' => fake()->dateTimeBetween('now', '+1 month'),
             'status' => fake()->randomElement(['todo', 'pending', 'completed']),
