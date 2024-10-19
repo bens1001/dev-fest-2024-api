@@ -12,6 +12,7 @@ use App\Http\Requests\Defect\StoreDefectRequest;
 use App\Http\Requests\Defect\UpdateDefectRequest;
 use App\Models\Alert;
 use App\Models\Task;
+use App\Models\User;
 
 /**
  * @group Defect
@@ -137,7 +138,7 @@ class DefectController extends Controller
             );
 
             // Create an alert for the defect
-            $alert = Alert::create([
+            Alert::create([
                 'machine_id' => $machine_id,
                 'alert_message' => 'New defect of type ' . $defect->defect_type . '.',
                 'alert_time' => now(),
@@ -146,6 +147,7 @@ class DefectController extends Controller
             // Create a task to fix the defect
             Task::create([
                 'machine_id' => $machine_id,
+                'user_id' => User::pluck('id')->random(),
                 'task_description' => 'Fix the defect of type: ' . $defect->defect_type,
                 'status' => 'todo',
             ]);
