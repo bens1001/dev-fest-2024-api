@@ -13,7 +13,6 @@
 - **Defect Management:** Logs and tracks machine defects for quality control.
 - **Energy Usage Tracking:** Monitors energy consumption to help optimize factory efficiency.
 - **Task Scheduling:** Automates tasks like maintenance based on machine usage.
-- **Dashboard & Visualization:** Interactive dashboard for factory managers to visualize data trends and machine status.
 - **RESTful API Integration:** Provides APIs for managing machines, production, defects, and energy usage.
 - **Authentication & Authorization:** Secure API with token-based authentication.
 
