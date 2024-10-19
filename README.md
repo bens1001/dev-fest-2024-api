@@ -38,7 +38,7 @@ You can use Laravel Sail with Docker to run the application. Start the container
 Then, run the database migrations to set up the schema:
 
 ```sh
-./vendor/bin/sail artisan migrate
+./vendor/bin/sail php artisan migrate
 ```
 
 ## API Documentation
@@ -67,13 +67,13 @@ Start your local server using Laravel Sail:
 To generate an application key:
 
 ```sh
-./vendor/bin/sail artisan key:generate
+./vendor/bin/sail php artisan key:generate
 ```
 
 To run database migrations:
 
 ```sh
-./vendor/bin/sail artisan migrate
+./vendor/bin/sail php artisan migrate
 ```
 
 ## Author
