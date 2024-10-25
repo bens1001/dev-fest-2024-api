@@ -21,15 +21,16 @@ class AuthController extends Controller
      *
      * Authenticate a user and generate a new authentication token.
      *
-     * Before using this endpoint:
+     * ### Before using this endpoint:
      * - Ensure the user is registered in the system.
      * - Provide valid email and password credentials.
      *
-     * After using this endpoint:
+     * ### After using this endpoint:
      * - A token will be generated for the user, which can be used for authenticated requests.
      *
      * @response 200 {
-     *   "token": "1|abc123tokenxyz"
+     *   "token": "1|abc123tokenxyz",
+     *   "role": "admin"
      * }
      * @response 401 {"message": "Unauthorized"}
      */
@@ -44,7 +45,13 @@ class AuthController extends Controller
 
         $token = $user->createToken('authToken')->plainTextToken;
 
-        return response()->json(['token' => $token], 200);
+        // Retrieve the user's role
+        $userRole = $user->getRoleNames();
+
+        return response()->json([
+            'token' => $token,
+            'role' => $userRole->first(),
+        ], 200);
     }
 
     /**
@@ -52,14 +59,14 @@ class AuthController extends Controller
      *
      * Log out the user and delete their active tokens.
      *
-     * Before using this endpoint:
+     * ### Before using this endpoint:
      * - Ensure the user is logged in.
      *
-     * After using this endpoint:
+     * ### After using this endpoint:
      * - The user's tokens will be revoked, logging them out.
      *
      * @response 200 {"message": "Logged out"}
-     * @response 404 {"message": "Not found"}
+     * @response 404 {"message": "User not found"}
      */
     public function logout(int $user_id)
     {
@@ -83,16 +90,20 @@ class AuthController extends Controller
      *
      * Update the user's password after verifying the current password.
      *
-     * Before using this endpoint:
+     * ### Before using this endpoint:
      * - Provide the user's current password for verification.
      * - Provide the new password.
      *
-     * After using this endpoint:
+     * ### After using this endpoint:
      * - The user's password will be updated to the new one.
+     *
+     * @bodyParam email string required The user's email address. Example: user@example.com
+     * @bodyParam current_password string required The user's current password. Example: secret123
+     * @bodyParam new_password string required The user's new password. Example: newsecret456
      *
      * @response 200 {"message": "Password changed successfully"}
      * @response 400 {"message": "Current password is incorrect"}
-     * @response 404 {"message": "Not found"}
+     * @response 404 {"message": "User not found"}
      */
     public function changePassword(ChangePasswordRequest $request)
     {

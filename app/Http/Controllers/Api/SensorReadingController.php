@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\SensorReading;
 use App\Http\Resources\SensorReadingResource;
 use Illuminate\Support\Facades\DB;
+use App\Events\SensorReadingBroadcasted;
 use App\Models\Machine;
 
 /**
@@ -58,11 +59,13 @@ class SensorReadingController extends Controller
             $machineIdFromTable = Machine::where('machine_type', $machineType)->value('id');
 
             // Create the sensor reading
-            SensorReading::create([
+            $sensorReading = SensorReading::create([
                 'machine_id' => $machineIdFromTable,
                 'sensor_data' => json_encode($data),
                 'reading_time' => now(),
             ]);
+
+            broadcast(new SensorReadingBroadcasted($sensorReading))->toOthers();
 
             DB::commit();
             return response()->json(['message' => 'Sensor readings saved successfully'], 201);
@@ -108,13 +111,15 @@ class SensorReadingController extends Controller
      */
     public function index(Request $request)
     {
-        try {
+        try { 
             $query = SensorReading::query();
 
             // Optional filtering
-            if ($request->has('sensor_id')) {
-                $query->where('sensor_id', $request->sensor_id);
+            if ($request->has('machine_id')) {
+                $query->where('machine_id', $request->machine_id);
             }
+
+            $query->orderBy('reading_time', 'desc');
 
             // You can add more filters here as needed
             $sensorReadings = $query->paginate($request->per_page ?? 10);

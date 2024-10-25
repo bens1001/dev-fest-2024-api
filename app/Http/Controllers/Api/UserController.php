@@ -9,6 +9,8 @@ use App\Http\Resources\UserResource;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
 
 
 /**
@@ -131,15 +133,38 @@ class UserController extends Controller
         try {
             DB::beginTransaction();
 
+            // Get the currently authenticated user (creator)
+            $creator = request()->user();
+
+            // Retrieve the role from the request
+            $role = $request->validated()['role'];
+
+
+            if ($creator->hasRole('manager')) {
+                // Manager can only assign 'operator' role
+                if ($role !== 'operator') {
+                    return response()->json(['message' => 'Invalid role. Manager can only assign operator role.'], 403);
+                }
+            } else if ($creator->hasRole('operator')) {
+                // If the creator doesn't have permission to assign roles, return an error
+                return response()->json(['message' => 'You do not have permission to assign roles.'], 403);
+            }
+
+            // Create the user
             $user = User::create($request->validated());
+
+            // Assign the validated role to the new user
+            $user->assignRole($role);
 
             DB::commit();
             return new UserResource($user);
         } catch (\Exception $e) {
             DB::rollback();
-            return response()->json(['message' => 'Not found'], 404);
+            return response()->json(['message' => 'Failed to create user: ' . $e->getMessage()], 500);
         }
     }
+
+
 
     /**
      * Update a User
