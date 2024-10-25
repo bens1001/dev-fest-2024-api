@@ -61,6 +61,11 @@ class UserController extends Controller
                 $query->where('gender', $request->gender);
             }
 
+            // Optional search by full_name with partial match
+            if ($request->has('full_name')) {
+                $query->where('full_name', 'LIKE', '%' . $request->full_name . '%');
+            }
+
             // You can add more filters here as needed
             $users = $query->paginate($request->per_page ?? 10);
 

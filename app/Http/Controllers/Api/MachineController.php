@@ -57,6 +57,10 @@ class MachineController extends Controller
                 $query->where('status', $request->status);
             }
 
+            if ($request->has('machine_name')) {
+                $query->where('machine_name', 'LIKE', '%' . $request->machine_name . '%');
+            }
+
             if ($request->has('machine_type')) {
                 $query->where('machine_type', 'LIKE', '%' . $request->machine_type . '%');
             }
