@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('alerts', function (Blueprint $table) {
+        Schema::create('data_points', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('machine_id')->constrained('machines')->onDelete('cascade');
-            $table->foreignId('data_point_id')->constrained('data_points')->onDelete('cascade');
-            $table->string('alert_message');
-            $table->dateTime('alert_time');
+            $table->timestamp('timestamp');
+            $table->string('kpi_name');
+            $table->decimal('kpi_value', 8, 2);
+            $table->boolean('status');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('alerts');
+        Schema::dropIfExists('data_points');
     }
 };

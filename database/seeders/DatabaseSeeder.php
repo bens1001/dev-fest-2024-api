@@ -30,12 +30,12 @@ class DatabaseSeeder extends Seeder
         SensorReading::factory()->count(10)->create();
         Production::factory()->count(10)->create();
         Task::factory()->count(10)->create();
-        $alerts = Alert::factory()->count(10)->create();
+        // $alerts = Alert::factory()->count(10)->create();
         Defect::factory()->count(10)->create();
 
-        foreach ($users as $user) {
-            $randomAlerts = $alerts->random(rand(1, 3)); // Randomly assign 1 to 3 alerts
-            $user->alerts()->attach($randomAlerts);
-        }
+        // foreach ($users as $user) {
+        //     $randomAlerts = $alerts->random(rand(1, 3)); // Randomly assign 1 to 3 alerts
+        //     $user->alerts()->attach($randomAlerts);
+        // }
     }
 }

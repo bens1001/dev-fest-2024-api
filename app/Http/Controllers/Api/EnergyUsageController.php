@@ -51,7 +51,16 @@ class EnergyUsageController extends Controller
     public function index(Request $request)
     {
         try {
-            $energyUsage = EnergyUsage::paginate($request->per_page ?? 10);
+            $query = EnergyUsage::query();
+
+            // Optional filtering
+            if ($request->has('machine_id')) {
+                $query->where('machine_id', $request->machine_id);
+            }
+
+            $query->orderBy('end_shift_time', 'desc');
+
+            $energyUsage = $query->paginate($request->per_page ?? 10);
 
             return EnergyUsageResource::collection($energyUsage);
         } catch (\Exception $e) {

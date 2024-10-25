@@ -10,16 +10,15 @@ use App\Http\Controllers\Api\{
     SensorReadingController,
     TaskController,
     UserController,
-    DefectController
+    DefectController,
+    DataPointController
 };
 
 Route::post('/webhook', [SensorReadingController::class, 'receiveData']);
 
 // Authentication routes
 Route::prefix('auth')->group(function () {
-    Route::post('login', [AuthController::class, 'login'])
-    // ->middleware('permission:login')
-    ;
+    Route::post('login', [AuthController::class, 'login']);
 
     // Protected routes for logged-in users
     Route::middleware('auth:sanctum')->group(function () {
@@ -28,10 +27,9 @@ Route::prefix('auth')->group(function () {
     });
 });
 
-// Protected routes with Sanctum and permissions check
 Route::middleware(['auth:sanctum'])->group(function () {
 
-    // Routes for Users with 'manage users' permission
+    // Routes for Users
     Route::prefix('users')->group(function () {
         Route::get('/', [UserController::class, 'index'])->middleware('permission:view users');
         Route::get('/{user_id}', [UserController::class, 'show'])->middleware('permission:view users');
@@ -89,11 +87,18 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::delete('/{sensor_reading_id}', [SensorReadingController::class, 'destroy'])->middleware('permission:delete sensor_readings');
     });
 
+    // Routes for Defects
     Route::prefix('defects')->group(function () {
         Route::get('/', [DefectController::class, 'index'])->middleware('permission:view defects');
         Route::get('/{defect_id}', [DefectController::class, 'show'])->middleware('permission:view defects');
         Route::post('/{machine_id}', [DefectController::class, 'store'])->middleware('permission:create defects');
         Route::put('/{defect_id}', [DefectController::class, 'update'])->middleware('permission:edit defects');
         Route::delete('/{defect_id}', [DefectController::class, 'destroy'])->middleware('permission:delete defects');
+    });
+
+    // Routes for Data Points
+    Route::prefix('data-points')->group(function () {
+        Route::get('/', [DataPointController::class, 'index'])->middleware('permission:view data_points');
+        Route::get('/{data_point_id}', [DataPointController::class, 'show'])->middleware('permission:view data_points');
     });
 });

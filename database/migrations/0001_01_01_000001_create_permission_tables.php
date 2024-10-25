@@ -68,13 +68,16 @@ return new class extends Migration
                 $table->unsignedBigInteger($columnNames['team_foreign_key']);
                 $table->index($columnNames['team_foreign_key'], 'model_has_permissions_team_foreign_key_index');
 
-                $table->primary([$columnNames['team_foreign_key'], $pivotPermission, $columnNames['model_morph_key'], 'model_type'],
-                    'model_has_permissions_permission_model_type_primary');
+                $table->primary(
+                    [$columnNames['team_foreign_key'], $pivotPermission, $columnNames['model_morph_key'], 'model_type'],
+                    'model_has_permissions_permission_model_type_primary'
+                );
             } else {
-                $table->primary([$pivotPermission, $columnNames['model_morph_key'], 'model_type'],
-                    'model_has_permissions_permission_model_type_primary');
+                $table->primary(
+                    [$pivotPermission, $columnNames['model_morph_key'], 'model_type'],
+                    'model_has_permissions_permission_model_type_primary'
+                );
             }
-
         });
 
         Schema::create($tableNames['model_has_roles'], function (Blueprint $table) use ($tableNames, $columnNames, $pivotRole, $teams) {
@@ -92,11 +95,15 @@ return new class extends Migration
                 $table->unsignedBigInteger($columnNames['team_foreign_key']);
                 $table->index($columnNames['team_foreign_key'], 'model_has_roles_team_foreign_key_index');
 
-                $table->primary([$columnNames['team_foreign_key'], $pivotRole, $columnNames['model_morph_key'], 'model_type'],
-                    'model_has_roles_role_model_type_primary');
+                $table->primary(
+                    [$columnNames['team_foreign_key'], $pivotRole, $columnNames['model_morph_key'], 'model_type'],
+                    'model_has_roles_role_model_type_primary'
+                );
             } else {
-                $table->primary([$pivotRole, $columnNames['model_morph_key'], 'model_type'],
-                    'model_has_roles_role_model_type_primary');
+                $table->primary(
+                    [$pivotRole, $columnNames['model_morph_key'], 'model_type'],
+                    'model_has_roles_role_model_type_primary'
+                );
             }
         });
 
@@ -154,6 +161,7 @@ return new class extends Migration
             'create defects',
             'edit defects',
             'delete defects',
+            'view data_points',
             'login',
         ];
 
@@ -167,8 +175,8 @@ return new class extends Migration
         $roleAdmin = Role::create(['name' => 'admin', 'guard_name' => 'web']);
 
         // Assign permissions to roles
-        $roleOperator->givePermissionTo(['view machines', 'view alerts', 'view production', 'view sensor_readings', 'view energy_usage', 'view defects', 'login']);
-        $roleManager->givePermissionTo(['view machines', 'view alerts', 'view production', 'create production', 'edit production', 'view sensor_readings', 'view energy_usage', 'create energy_usage', 'create defects', 'view users', 'create users', 'edit users', 'delete users', 'login']);
+        $roleOperator->givePermissionTo(['view machines', 'view alerts', 'view production', 'view sensor_readings', 'view energy_usage', 'view defects', 'login',]);
+        $roleManager->givePermissionTo(['view machines', 'view alerts', 'view production', 'create production', 'edit production', 'view sensor_readings', 'view energy_usage', 'create energy_usage', 'create defects', 'view users', 'create users', 'edit users', 'delete users', 'login', 'view data_points']);
         $roleAdmin->givePermissionTo(Permission::all());
 
         app('cache')

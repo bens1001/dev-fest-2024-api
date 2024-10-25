@@ -25,7 +25,7 @@ class UpdateUserRequest extends FormRequest
         return [
             'full_name' => 'sometimes|string',
             'email' => 'sometimes|email|unique:users,email',
-            'gender' => ['sometimes', 'string', Rule::in(['Male','Female'])],
+            'gender' => ['sometimes', 'string', Rule::in(['male','female'])],
         ];
     }
 }

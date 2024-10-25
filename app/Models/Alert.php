@@ -11,6 +11,7 @@ class Alert extends Model
 
     protected $fillable = [
         'machine_id',
+        'data_point_id',
         'alert_message',
         'alert_time',
     ];
@@ -23,5 +24,10 @@ class Alert extends Model
     public function users()
     {
         return $this->hasMany(UserAlert::class);
+    }
+
+    public function dataPoint()
+    {
+        return $this->belongsTo(DataPoint::class);
     }
 }
