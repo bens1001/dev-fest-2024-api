@@ -1,0 +1,451 @@
+name: User
+description: |-
+
+  APIs for User management.
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/users
+    metadata:
+      groupName: User
+      groupDescription: |-
+
+        APIs for User management.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List Users'
+      description: |-
+        Retrieve a paginated list of users, with optional filtering by gender.
+
+        Before using this endpoint:
+        - Ensure users are available.
+
+        After using this endpoint:
+        - You will receive a paginated list of users, optionally filtered by gender.
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":[{"id":41,"full_name":"Darlene Lockman II","gender":"male","email":"nsmitham@example.org","role":null},{"id":42,"full_name":"Felix Hahn","gender":"female","email":"quigley.kaylah@example.net","role":null}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"\/?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"\/","per_page":10,"to":2,"total":2}}'
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 200
+        content: |-
+          {
+            "data": [
+              {
+                "id": 1,
+                "name": "John Doe",
+                "email": "john@example.com",
+                "gender": "male",
+                "created_at": "2024-10-18T10:00:00.000000Z",
+                "updated_at": "2024-10-18T10:00:00.000000Z"
+              },
+              ...
+            ],
+            "links": {...},
+            "meta": {...}
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: '{"message": "Not found"}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/users/{user_id}'
+    metadata:
+      groupName: User
+      groupDescription: |-
+
+        APIs for User management.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Show a User'
+      description: |-
+        Retrieve details of a specific user by ID.
+
+        Before using this endpoint:
+        - Ensure that the user exists.
+
+        After using this endpoint:
+        - You will receive the details of the selected user.
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      user_id:
+        name: user_id
+        description: 'The ID of the user.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      user_id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":{"id":43,"full_name":"Marcus Anderson","gender":"female","email":"anibal.abshire@example.net","role":null}}'
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 200
+        content: |-
+          {
+            "id": 1,
+            "name": "John Doe",
+            "email": "john@example.com",
+            "gender": "male",
+            "created_at": "2024-10-18T10:00:00.000000Z",
+            "updated_at": "2024-10-18T10:00:00.000000Z"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: '{"message": "Not found"}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/users
+    metadata:
+      groupName: User
+      groupDescription: |-
+
+        APIs for User management.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Store a User'
+      description: |-
+        Create a new user with the provided details.
+
+        Before using this endpoint:
+        - Ensure the request data is valid.
+
+        After using this endpoint:
+        - The new user will be created and returned.
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      full_name:
+        name: full_name
+        description: ''
+        required: true
+        example: iste
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      email:
+        name: email
+        description: 'Must be a valid email address.'
+        required: true
+        example: uquigley@example.org
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      password:
+        name: password
+        description: 'Must be at least 8 characters.'
+        required: true
+        example: ';51G1?`TcJB,ag'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      gender:
+        name: gender
+        description: ''
+        required: true
+        example: male
+        type: string
+        enumValues:
+          - male
+          - female
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      role:
+        name: role
+        description: ''
+        required: true
+        example: admin
+        type: string
+        enumValues:
+          - admin
+          - manager
+          - operator
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      full_name: iste
+      email: uquigley@example.org
+      password: ';51G1?`TcJB,ag'
+      gender: male
+      role: admin
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":{"id":44,"full_name":"Prof. Torrey Sporer","gender":"male","email":"merritt52@example.com","role":null}}'
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 201
+        content: |-
+          {
+            "id": 1,
+            "name": "John Doe",
+            "email": "john@example.com",
+            "gender": "male",
+            "created_at": "2024-10-18T10:00:00.000000Z",
+            "updated_at": "2024-10-18T10:00:00.000000Z"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: '{"message": "Not found"}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+    uri: 'api/users/{user_id}'
+    metadata:
+      groupName: User
+      groupDescription: |-
+
+        APIs for User management.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update a User'
+      description: |-
+        Update the details of an existing user.
+
+        Before using this endpoint:
+        - Ensure that the user exists.
+
+        After using this endpoint:
+        - The user's details will be updated with the provided data.
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      user_id:
+        name: user_id
+        description: 'The ID of the user.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      user_id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      full_name:
+        name: full_name
+        description: ''
+        required: false
+        example: corporis
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      email:
+        name: email
+        description: 'Must be a valid email address.'
+        required: false
+        example: jarrell48@example.net
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      gender:
+        name: gender
+        description: ''
+        required: false
+        example: female
+        type: string
+        enumValues:
+          - male
+          - female
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      full_name: corporis
+      email: jarrell48@example.net
+      gender: female
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":{"id":45,"full_name":"Natalie Lindgren","gender":"male","email":"cbernhard@example.net","role":null}}'
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 200
+        content: |-
+          {
+            "id": 1,
+            "name": "Updated John Doe",
+            "email": "john.updated@example.com",
+            "gender": "male",
+            "created_at": "2024-10-18T10:00:00.000000Z",
+            "updated_at": "2024-10-18T10:00:00.000000Z"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: '{"message": "Not found"}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/users/{user_id}'
+    metadata:
+      groupName: User
+      groupDescription: |-
+
+        APIs for User management.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete a User'
+      description: |-
+        Permanently remove a user from the system.
+
+        Before using this endpoint:
+        - Ensure that the user exists.
+
+        After using this endpoint:
+        - The user will be deleted from the system.
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      user_id:
+        name: user_id
+        description: 'The ID of the user.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      user_id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"message": "User deleted"}'
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: '{"message": "Not found"}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

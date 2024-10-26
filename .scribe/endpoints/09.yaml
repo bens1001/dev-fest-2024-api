@@ -1,0 +1,211 @@
+name: 'Data Point'
+description: |-
+
+  APIs for Data Points management.
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/data-points
+    metadata:
+      groupName: 'Data Point'
+      groupDescription: |-
+
+        APIs for Data Points management.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List Data Points'
+      description: 'Retrieve a list of data points with optional filters for KPI name, date range, and status.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      kpi_name:
+        name: kpi_name
+        description: 'Optional. Filter by KPI name.'
+        required: false
+        example: '"Stamping Press Efficiency".'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      start_date:
+        name: start_date
+        description: 'date Optional. Start date for filtering by timestamp. Format: Y-m-d.'
+        required: false
+        example: '"2024-01-01".'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      end_date:
+        name: end_date
+        description: 'date Optional. End date for filtering by timestamp. Format: Y-m-d.'
+        required: false
+        example: '"2024-12-31".'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      status:
+        name: status
+        description: 'Optional. Filter by status.'
+        required: false
+        example: '"active".'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      per_page:
+        name: per_page
+        description: 'Optional. Number of results per page. Defaults to 10.'
+        required: false
+        example: 9
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanQueryParameters:
+      kpi_name: '"Stamping Press Efficiency".'
+      start_date: '"2024-01-01".'
+      end_date: '"2024-12-31".'
+      status: '"active".'
+      per_page: 9
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+              "data": [
+                  {
+                      "id": 1,
+                      "kpi_name": "Stamping Press Efficiency",
+                      "timestamp": "2024-10-25T10:00:00.000000Z",
+                      "status": "active",
+                      "value": 95.5
+                  }
+              ],
+              "links": {
+                  "first": "...",
+                  "last": "...",
+                  "prev": null,
+                  "next": "..."
+              },
+              "meta": {
+                  "current_page": 1,
+                  "from": 1,
+                  "last_page": 1,
+                  "path": "...",
+                  "per_page": 10,
+                  "to": 10,
+                  "total": 10
+              }
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+              "message": "Not found"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/data-points/{data_point_id}'
+    metadata:
+      groupName: 'Data Point'
+      groupDescription: |-
+
+        APIs for Data Points management.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Show Data Point'
+      description: 'Retrieve a specific data point by its ID.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      data_point_id:
+        name: data_point_id
+        description: 'The ID of the data point.'
+        required: true
+        example: sapiente
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      id:
+        name: id
+        description: 'The ID of the data point to retrieve.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      data_point_id: sapiente
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+              "data": {
+                  "id": 1,
+                  "kpi_name": "Stamping Press Efficiency",
+                  "timestamp": "2024-10-25T10:00:00.000000Z",
+                  "status": "active",
+                  "value": 95.5
+              }
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+              "message": "Not found"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

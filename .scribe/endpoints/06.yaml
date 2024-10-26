@@ -1,0 +1,431 @@
+name: 'Energy Usage'
+description: |-
+
+  APIs for Energy Usage management.
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/energy-usage
+    metadata:
+      groupName: 'Energy Usage'
+      groupDescription: |-
+
+        APIs for Energy Usage management.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List Energy Usage Records'
+      description: |-
+        Retrieve a paginated list of energy usage records.
+
+        Before using this endpoint:
+        - Ensure energy usage records have been added to the system.
+
+        After using this endpoint:
+        - You will get a list of energy usage records, filtered as needed.
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":[{"id":36,"machine_id":23,"machine_name":"nemo","machine_type":"Leak Test Machine","energy_consumed":302.93,"start_shift_time":"2009-08-13 00:18:37","end_shift_time":"1982-07-13 13:27:28"},{"id":37,"machine_id":24,"machine_name":"beatae","machine_type":"Automated Guided Vehicle","energy_consumed":212.06,"start_shift_time":"2004-08-17 01:54:57","end_shift_time":"1989-01-25 13:34:18"}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"\/?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"\/","per_page":10,"to":2,"total":2}}'
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 200
+        content: |-
+          {
+            "data": [
+              {
+                "id": 1,
+                "machine_id": 1,
+                "energy_consumed": 123.45,
+                "created_at": "2024-10-18T10:00:00.000000Z",
+                "updated_at": "2024-10-18T10:00:00.000000Z"
+              },
+              ...
+            ],
+            "links": {...},
+            "meta": {...}
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: '{"message": "Not found"}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/energy-usage/{energy_usage_id}'
+    metadata:
+      groupName: 'Energy Usage'
+      groupDescription: |-
+
+        APIs for Energy Usage management.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Show an Energy Usage Record'
+      description: |-
+        Retrieve details of a specific energy usage record by ID.
+
+        Before using this endpoint:
+        - Ensure that the energy usage record exists in the system.
+
+        After using this endpoint:
+        - You will receive detailed information about the selected energy usage record.
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      energy_usage_id:
+        name: energy_usage_id
+        description: 'The ID of the energy usage.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      energy_usage_id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":{"id":38,"machine_id":20,"machine_name":"sed","machine_type":"Automated Guided Vehicle","energy_consumed":787.92,"start_shift_time":"1983-03-23 15:15:30","end_shift_time":"2001-11-24 09:00:39"}}'
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 200
+        content: |-
+          {
+            "id": 1,
+            "machine_id": 1,
+            "energy_consumed": 123.45,
+            "created_at": "2024-10-18T10:00:00.000000Z",
+            "updated_at": "2024-10-18T10:00:00.000000Z"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: '{"message": "Not found"}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/energy-usage/{machine_id}'
+    metadata:
+      groupName: 'Energy Usage'
+      groupDescription: |-
+
+        APIs for Energy Usage management.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Create a New Energy Usage Record'
+      description: |-
+        Add a new energy usage record associated with a specific machine.
+
+        Before using this endpoint:
+        - Ensure the machine exists and is valid.
+        - Provide necessary energy usage details.
+
+        After using this endpoint:
+        - A new energy usage record will be created and associated with the machine.
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      machine_id:
+        name: machine_id
+        description: 'The ID of the machine.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      machine_id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      energy_consumed:
+        name: energy_consumed
+        description: ''
+        required: true
+        example: 28.7700178
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      start_shift_time:
+        name: start_shift_time
+        description: 'Must be a valid date. Must be a valid date in the format <code>Y-m-d H:i:s</code>. Must be a date before <code>end_shift_time</code>.'
+        required: true
+        example: '2022-04-14'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      end_shift_time:
+        name: end_shift_time
+        description: 'Must be a valid date. Must be a valid date in the format <code>Y-m-d H:i:s</code>. Must be a date after <code>start_shift_time</code>.'
+        required: true
+        example: '2120-12-02'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      energy_consumed: 28.7700178
+      start_shift_time: '2022-04-14'
+      end_shift_time: '2120-12-02'
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":{"id":39,"machine_id":20,"machine_name":"sed","machine_type":"Automated Guided Vehicle","energy_consumed":323.69,"start_shift_time":"1973-07-09 09:10:21","end_shift_time":"2011-05-13 20:15:13"}}'
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 201
+        content: |-
+          {
+            "id": 1,
+            "machine_id": 1,
+            "energy_consumed": 123.45,
+            "created_at": "2024-10-18T10:00:00.000000Z",
+            "updated_at": "2024-10-18T10:00:00.000000Z"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: '{"message": "Not found"}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+    uri: 'api/energy-usage/{energy_usage_id}'
+    metadata:
+      groupName: 'Energy Usage'
+      groupDescription: |-
+
+        APIs for Energy Usage management.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update an Existing Energy Usage Record'
+      description: |-
+        Modify the details of an existing energy usage record.
+
+        Before using this endpoint:
+        - Ensure that the energy usage record exists.
+        - Provide updated energy usage details.
+
+        After using this endpoint:
+        - The energy usage record's details will be updated in the system.
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      energy_usage_id:
+        name: energy_usage_id
+        description: 'The ID of the energy usage.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      energy_usage_id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      energy_consumed:
+        name: energy_consumed
+        description: ''
+        required: false
+        example: 7.54986
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      start_shift_time:
+        name: start_shift_time
+        description: 'Must be a valid date. Must be a date before <code>end_shift_time</code>.'
+        required: false
+        example: '2008-05-05'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      end_shift_time:
+        name: end_shift_time
+        description: 'Must be a valid date. Must be a date after <code>start_shift_time</code>.'
+        required: false
+        example: '2054-12-13'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      energy_consumed: 7.54986
+      start_shift_time: '2008-05-05'
+      end_shift_time: '2054-12-13'
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":{"id":40,"machine_id":32,"machine_name":"repudiandae","machine_type":"Automated Guided Vehicle","energy_consumed":853.55,"start_shift_time":"2013-10-13 12:55:48","end_shift_time":"1975-04-06 06:33:27"}}'
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 200
+        content: |-
+          {
+            "id": 1,
+            "machine_id": 1,
+            "energy_consumed": 150.75,
+            "created_at": "2024-10-18T10:00:00.000000Z",
+            "updated_at": "2024-10-18T10:10:00.000000Z"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: '{"message": "Not found"}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/energy-usage/{energy_usage_id}'
+    metadata:
+      groupName: 'Energy Usage'
+      groupDescription: |-
+
+        APIs for Energy Usage management.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete an Energy Usage Record'
+      description: |-
+        Permanently remove an energy usage record from the system.
+
+        Before using this endpoint:
+        - Ensure that the energy usage record exists.
+
+        After using this endpoint:
+        - The energy usage record will be removed from the system.
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      energy_usage_id:
+        name: energy_usage_id
+        description: 'The ID of the energy usage.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      energy_usage_id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"message": "Energy usage record deleted"}'
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: '{"message": "Not found"}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

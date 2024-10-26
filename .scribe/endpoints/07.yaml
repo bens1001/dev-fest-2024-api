@@ -1,0 +1,457 @@
+name: Production
+description: |-
+
+  APIs for Production management.
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/productions
+    metadata:
+      groupName: Production
+      groupDescription: |-
+
+        APIs for Production management.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List Productions'
+      description: |-
+        Retrieve a paginated list of production records, with optional filtering by machine ID.
+
+        Before using this endpoint:
+        - Ensure productions have been recorded.
+
+        After using this endpoint:
+        - You will receive a list of production records, optionally filtered by machine ID.
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":[{"id":36,"machine_id":47,"machine_name":"aliquam","machine_type":"Stamping Press","start_time":"2024-10-19 09:05:08","end_time":"2024-10-30 11:20:12","output_quantity":737,"target_quantity":560},{"id":37,"machine_id":37,"machine_name":"veritatis","machine_type":"Automated Guided Vehicle","start_time":"2024-10-24 17:10:36","end_time":"2024-10-27 20:59:12","output_quantity":125,"target_quantity":654}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"\/?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"\/","per_page":10,"to":2,"total":2}}'
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 200
+        content: |-
+          {
+            "data": [
+              {
+                "id": 1,
+                "machine_id": 5,
+                "production_date": "2024-10-18",
+                "quantity": 1000,
+                "created_at": "2024-10-18T10:00:00.000000Z",
+                "updated_at": "2024-10-18T10:00:00.000000Z"
+              },
+              ...
+            ],
+            "links": {...},
+            "meta": {...}
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: '{"message": "Not found"}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/productions/{production_id}'
+    metadata:
+      groupName: Production
+      groupDescription: |-
+
+        APIs for Production management.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Show a Production Record'
+      description: |-
+        Retrieve details of a specific production record by ID.
+
+        Before using this endpoint:
+        - Ensure that the production record exists.
+
+        After using this endpoint:
+        - You will receive detailed information about the selected production record.
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      production_id:
+        name: production_id
+        description: 'The ID of the production.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      production_id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":{"id":38,"machine_id":36,"machine_name":"tempore","machine_type":"Automated Guided Vehicle","start_time":"2024-10-23 01:58:57","end_time":"2024-10-30 20:18:00","output_quantity":15,"target_quantity":651}}'
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 200
+        content: |-
+          {
+            "id": 1,
+            "machine_id": 5,
+            "production_date": "2024-10-18",
+            "quantity": 1000,
+            "created_at": "2024-10-18T10:00:00.000000Z",
+            "updated_at": "2024-10-18T10:00:00.000000Z"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: '{"message": "Not found"}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/productions/{machine_id}'
+    metadata:
+      groupName: Production
+      groupDescription: |-
+
+        APIs for Production management.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Create a New Production Record'
+      description: |-
+        Add a new production record to the system.
+
+        Before using this endpoint:
+        - Provide necessary details (machine ID, production date, quantity, etc.).
+        - The machine ID must correspond to an existing machine.
+
+        After using this endpoint:
+        - A new production record will be created.
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      machine_id:
+        name: machine_id
+        description: 'The ID of the machine.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      machine_id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      start_time:
+        name: start_time
+        description: 'Must be a valid date. Must be a valid date in the format <code>Y-m-d H:i:s</code>. Must be a date before <code>end_time</code>.'
+        required: true
+        example: '2016-12-25'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      end_time:
+        name: end_time
+        description: 'Must be a valid date. Must be a valid date in the format <code>Y-m-d H:i:s</code>. Must be a date after <code>start_time</code>.'
+        required: true
+        example: '2063-09-21'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      output_quantity:
+        name: output_quantity
+        description: ''
+        required: true
+        example: 6
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      target_quantity:
+        name: target_quantity
+        description: ''
+        required: true
+        example: 7
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      start_time: '2016-12-25'
+      end_time: '2063-09-21'
+      output_quantity: 6
+      target_quantity: 7
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":{"id":39,"machine_id":18,"machine_name":"ut","machine_type":"Welding Robot","start_time":"2024-10-21 11:12:22","end_time":"2024-10-30 10:19:12","output_quantity":385,"target_quantity":658}}'
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 201
+        content: |-
+          {
+            "id": 1,
+            "machine_id": 5,
+            "production_date": "2024-10-18",
+            "quantity": 1000,
+            "created_at": "2024-10-18T10:00:00.000000Z",
+            "updated_at": "2024-10-18T10:00:00.000000Z"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: '{"message": "Not found"}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+    uri: 'api/productions/{production_id}'
+    metadata:
+      groupName: Production
+      groupDescription: |-
+
+        APIs for Production management.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update an Existing Production Record'
+      description: |-
+        Modify the details of an existing production record by its ID.
+
+        Before using this endpoint:
+        - Ensure that the production record exists.
+        - Provide updated production details.
+
+        After using this endpoint:
+        - The production record's details will be updated in the system.
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      production_id:
+        name: production_id
+        description: 'The ID of the production.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      production_id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      start_time:
+        name: start_time
+        description: 'Must be a valid date. Must be a valid date in the format <code>Y-m-d H:i:s</code>. Must be a date before <code>end_time</code>.'
+        required: false
+        example: '1999-11-18'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      end_time:
+        name: end_time
+        description: 'Must be a valid date. Must be a valid date in the format <code>Y-m-d H:i:s</code>. Must be a date after <code>start_time</code>.'
+        required: false
+        example: '2079-12-04'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      output_quantity:
+        name: output_quantity
+        description: ''
+        required: false
+        example: 13
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      target_quantity:
+        name: target_quantity
+        description: ''
+        required: false
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      start_time: '1999-11-18'
+      end_time: '2079-12-04'
+      output_quantity: 13
+      target_quantity: 17
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":{"id":40,"machine_id":42,"machine_name":"iusto","machine_type":"Painting Robot","start_time":"2024-10-19 09:48:49","end_time":"2024-10-26 23:04:09","output_quantity":840,"target_quantity":951}}'
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 200
+        content: |-
+          {
+            "id": 1,
+            "machine_id": 5,
+            "production_date": "2024-10-18",
+            "quantity": 1200,
+            "created_at": "2024-10-18T10:00:00.000000Z",
+            "updated_at": "2024-10-18T10:10:00.000000Z"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: '{"message": "Not found"}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/productions/{production_id}'
+    metadata:
+      groupName: Production
+      groupDescription: |-
+
+        APIs for Production management.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete a Production Record'
+      description: |-
+        Permanently remove a production record from the system.
+
+        Before using this endpoint:
+        - Ensure that the production record exists.
+
+        After using this endpoint:
+        - The production record will be removed from the system.
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      production_id:
+        name: production_id
+        description: 'The ID of the production.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      production_id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"message": "Production deleted"}'
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: '{"message": "Not found"}'
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
