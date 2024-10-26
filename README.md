@@ -9,12 +9,36 @@
 
 ## Features
 
-- **Real-Time Monitoring:** Tracks machine performance, production status, and energy usage in real time.
-- **Defect Management:** Logs and tracks machine defects for quality control.
-- **Energy Usage Tracking:** Monitors energy consumption to help optimize factory efficiency.
-- **Task Scheduling:** Automates tasks like maintenance based on machine usage.
-- **RESTful API Integration:** Provides APIs for managing machines, production, defects, and energy usage.
-- **Authentication & Authorization:** Secure API with token-based authentication.
+### AI Data Point Integration
+- **Anomaly Detection**: Optional parameters to retrieve data points for specific machines and analyze them through an integrated AI model to identify anomalies.
+- **Data Processing**: Each data point can trigger alerts if anomalies are detected, improving operational efficiency.
+
+### Real-Time Data Processing
+- **Sensor Integration**: The API integrates with a simulated server that sends real-time sensor data every 20 seconds, allowing continuous monitoring of machine performance.
+- **WebSocket Communication**: Utilizes Reverb for WebSocket communication, enabling real-time updates and event-driven architecture.
+
+### Defect Management
+- **Create Defects**: Allows users to log defects related to machines via a `POST` request, including necessary details such as defect type and machine ID.
+- **List Defects**: Retrieve a list of all recorded defects through a `GET` request, with optional filters for specific machines or defect types.
+- **Update Defects**: Update existing defects with a `PUT` request to modify details like defect type or status.
+- **Delete Defects**: Remove defects from the system using a `DELETE` request.
+
+### User Management
+- **Role-Based Access Control**: Implements user roles (admin, manager, opertator) to ensure proper permissions for different actions, such as creating users or managing defects.
+- **User Creation**: Admin users can create new accounts via a `POST` request.
+- **User Listing**: Retrieve all users in the system using a `GET` request.
+
+### Energy Usage Tracking
+- **Monitor Energy Consumption**: The API tracks energy usage per machine, allowing manufacturers to optimize efficiency.
+- **Log Energy Data**: Log energy usage records for machines using a `POST` request, including fields for consumed energy and timestamps.
+
+### Search Functionality
+- **Dynamic Search**: Optional search parameters in the `GET` requests for machines, defects, and alerts allow users to filter results based on specific criteria.
+
+
+### Enhanced Documentation
+- **Scribe Integration**: Automatically generated API documentation using the Scribe package. This includes detailed information on endpoints, request/response formats, and usage examples.
+
 
 ## Installation
 
@@ -75,13 +99,100 @@ You can view it by navigating to `http://your-app-url/docs` in your web browser.
 
 ### API Overview
 
-The API allows users to manage machines, monitor production, track energy usage, handle defects, and manage sensor data.
+### Endpoints
 
-- **Machines API**: Create, update, list, and delete machines.
-- **Production API**: Manage production records, including start and end times.
-- **Defects API**: Log and track defects on machines.
-- **Energy Usage API**: Monitor energy consumption per machine.
-- **Sensor Data API**: Collect real-time data from connected machines.
+#### 1. Data Points
+- **Retrieve Data Points**
+  - `GET /data-points`
+    - **Query Parameters**: 
+      - `machine_id` (optional): Filter data points by machine ID.
+      - `search` (optional): Search term for data point attributes.
+    - **Response**: Returns a list of data points with timestamps, KPI values, and related machine information.
+
+- **Get Data Points by Machine**
+  - `GET /data-points/machine/{machine_id}`
+    - **Response**: Returns data points specific to the given machine ID.
+
+#### 2. Defects
+- **Create a Defect**
+  - `POST /defects`
+    - **Body**: 
+      ```json
+      {
+        "machine_id": "string",
+        "defect_type": "string",
+        "defect_time": "timestamp"
+      }
+      ```
+    - **Response**: Returns the created defect details.
+
+- **List Defects**
+  - `GET /defects`
+    - **Query Parameters**:
+      - `machine_id` (optional): Filter defects by machine ID.
+      - `defect_type` (optional): Filter by defect type.
+    - **Response**: Returns a list of defects.
+
+- **Get Defect by ID**
+  - `GET /defects/{id}`
+    - **Response**: Returns details of a specific defect.
+
+- **Update a Defect**
+  - `PUT /defects/{id}`
+    - **Body**: 
+      ```json
+      {
+        "defect_type": "string",
+        "defect_time": "timestamp"
+      }
+      ```
+    - **Response**: Returns the updated defect details.
+
+- **Delete a Defect**
+  - `DELETE /defects/{id}`
+    - **Response**: Confirms deletion of the defect.
+
+#### 3. Alerts
+- **Retrieve Alerts**
+  - `GET /alerts`
+    - **Query Parameters**:
+      - `machine_id` (optional): Filter alerts by machine ID.
+    - **Response**: Returns a list of generated alerts based on defect detection.
+
+#### 4. Energy Usage
+- **Log Energy Usage**
+  - `POST /energy-usage`
+    - **Body**: 
+      ```json
+      {
+        "machine_id": "string",
+        "energy_consumed": "number",
+        "start_shift_time": "timestamp",
+        "end_shift_time": "timestamp"
+      }
+      ```
+    - **Response**: Returns the logged energy usage details.
+
+- **Retrieve Energy Usage**
+  - `GET /energy-usage`
+    - **Response**: Returns energy usage records for machines.
+
+#### 5. Users
+- **List Users**
+  - `GET /users`
+    - **Response**: Returns a list of users in the system (admin access required).
+
+- **Create User**
+  - `POST /users`
+    - **Body**: 
+      ```json
+      {
+        "name": "string",
+        "email": "string",
+        "role": "string"
+      }
+      ```
+    - **Response**: Returns the created user details.
 
 ## Usage Examples
 
