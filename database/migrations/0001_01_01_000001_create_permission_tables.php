@@ -175,8 +175,26 @@ return new class extends Migration
         $roleAdmin = Role::create(['name' => 'admin', 'guard_name' => 'web']);
 
         // Assign permissions to roles
-        $roleOperator->givePermissionTo(['view machines', 'view alerts', 'view production', 'view sensor_readings', 'view energy_usage', 'view defects', 'login',]);
-        $roleManager->givePermissionTo(['view machines', 'view alerts', 'view production', 'create production', 'edit production', 'view sensor_readings', 'view energy_usage', 'create energy_usage', 'create defects', 'view users', 'create users', 'edit users', 'delete users', 'login', 'view data_points']);
+        $roleOperator->givePermissionTo(['view machines', 'view alerts', 'view production', 'view sensor_readings', 'view energy_usage', 'view defects', 'login','view tasks','logout']);
+        $roleManager->givePermissionTo([
+            'view machines',
+            'view alerts',
+            'view production',
+            'create production',
+            'edit production',
+            'view sensor_readings',
+            'view energy_usage',
+            'create energy_usage',
+            'create defects',
+            'view users',
+            'create users',
+            'edit users',
+            'delete users',
+            'login',
+            'view data_points',
+            'view tasks',
+            'view defects',
+        ]);
         $roleAdmin->givePermissionTo(Permission::all());
 
         app('cache')
