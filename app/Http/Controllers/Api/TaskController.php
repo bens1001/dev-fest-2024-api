@@ -34,10 +34,12 @@ class TaskController extends Controller
      *   "data": [
      *     {
      *       "id": 1,
-     *       "title": "Task 1",
+     *       "task_description": "Task 1",
+     *       "user_id": 1,
+     *       "user_full_name": "John Doe",
+     *       "due_date": "2024-10-30",
      *       "status": "pending",
-     *       "created_at": "2024-10-18T10:00:00.000000Z",
-     *       "updated_at": "2024-10-18T10:00:00.000000Z"
+     *       "created_at": "2024-10-18T10:00:00.000000Z"
      *     },
      *     ...
      *   ],
@@ -81,10 +83,12 @@ class TaskController extends Controller
      *
      * @response 200 {
      *   "id": 1,
-     *   "title": "Task 1",
+     *   "task_description": "Task 1",
+     *   "user_id": 1,
+     *   "user_full_name": "John Doe",
+     *   "due_date": "2024-10-30",
      *   "status": "pending",
-     *   "created_at": "2024-10-18T10:00:00.000000Z",
-     *   "updated_at": "2024-10-18T10:00:00.000000Z"
+     *   "created_at": "2024-10-18T10:00:00.000000Z"
      * }
      * @response 404 {"message": "Not found"}
      */
@@ -114,11 +118,12 @@ class TaskController extends Controller
      *
      * @response 200 {
      *   "id": 1,
-     *   
-     *   "title": "Updated Task",
+     *   "task_description": "Updated Task",
+     *   "user_id": 1,
+     *   "user_full_name": "John Doe",
+     *   "due_date": "2024-10-30",
      *   "status": "completed",
-     *   "created_at": "2024-10-18T10:00:00.000000Z",
-     *   "updated_at": "2024-10-18T10:00:00.000000Z"
+     *   "created_at": "2024-10-18T10:00:00.000000Z"
      * }
      * @response 404 {"message": "Not found"}
      */

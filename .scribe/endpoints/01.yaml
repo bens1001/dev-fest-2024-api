@@ -15,15 +15,7 @@ endpoints:
       subgroup: ''
       subgroupDescription: ''
       title: 'User Login'
-      description: |-
-        Authenticate a user and generate a new authentication token.
-
-        ### Before using this endpoint:
-        - Ensure the user is registered in the system.
-        - Provide valid email and password credentials.
-
-        ### After using this endpoint:
-        - A token will be generated for the user, which can be used for authenticated requests.
+      description: 'Authenticate a user and generate a new authentication token.'
       authenticated: false
       custom: []
     headers:
@@ -36,27 +28,27 @@ endpoints:
     bodyParameters:
       email:
         name: email
-        description: 'Must be a valid email address.'
+        description: "The user's email address."
         required: true
-        example: ukuvalis@example.net
+        example: user@example.com
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
       password:
         name: password
-        description: ''
+        description: "The user's password."
         required: true
-        example: ge>pJAI-q51W
+        example: secret123
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
     cleanBodyParameters:
-      email: ukuvalis@example.net
-      password: ge>pJAI-q51W
+      email: user@example.com
+      password: secret123
     fileParameters: []
     responses:
       -
@@ -64,7 +56,13 @@ endpoints:
         content: |-
           {
             "token": "1|abc123tokenxyz",
-            "role": "admin"
+            "role": "admin",
+            "user": {
+              "id": 1,
+              "full_name": "John Doe",
+              "email": "user@example.com",
+              "gender": "male"
+            }
           }
         headers: []
         description: ''
@@ -101,24 +99,25 @@ endpoints:
 
         ### After using this endpoint:
         - The user's tokens will be revoked, logging them out.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
       user_id:
         name: user_id
-        description: 'The ID of the user.'
+        description: 'The ID of the user to log out.'
         required: true
-        example: debitis
-        type: string
+        example: 1
+        type: integer
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         custom: []
     cleanUrlParameters:
-      user_id: debitis
+      user_id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -138,7 +137,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Pa4cZbhd1V5ve3fgaE86kD6'
     controller: null
     method: null
     route: null
@@ -164,9 +166,10 @@ endpoints:
 
         ### After using this endpoint:
         - The user's password will be updated to the new one.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -229,7 +232,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer E45hZDga8Pfk1cvVebad663'
     controller: null
     method: null
     route: null

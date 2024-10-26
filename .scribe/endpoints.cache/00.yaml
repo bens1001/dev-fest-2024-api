@@ -77,16 +77,17 @@ endpoints:
       subgroupDescription: ''
       title: 'List Sensor Readings'
       description: |-
-        Retrieve a paginated list of sensor readings, with optional filtering by sensor ID.
+        Retrieve a paginated list of sensor readings, with optional filtering by machine ID.
 
         Before using this endpoint:
         - Ensure sensor readings are available.
 
         After using this endpoint:
-        - You will receive a paginated list of sensor readings, optionally filtered by sensor ID.
-      authenticated: false
+        - You will receive a paginated list of sensor readings, optionally filtered by machine ID.
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -99,7 +100,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":[{"id":26,"machine_id":10,"machine_name":"qui","machine_type":"Painting Robot","sensor_data":"{\"humidity\": 51, \"timestamp\": \"1980-07-15T08:08:37+0000\", \"machine_id\": 10, \"temperature\": 30, \"arm_position\": {\"x\": 148.44, \"y\": 87.51, \"z\": 206.69}, \"atomizer_speed\": 15998, \"spray_pressure\": 2.1, \"paint_flow_rate\": 4.8, \"paint_thickness\": 111, \"paint_volume_used\": 0.61, \"solvent_concentration\": 9.51, \"booth_airflow_velocity\": 0.53, \"overspray_capture_efficiency\": 97}","reading_time":"1971-11-21 09:59:56"},{"id":27,"machine_id":4,"machine_name":"placeat","machine_type":"CNC Machine","sensor_data":"{\"chip_load\": 0.26, \"cut_depth\": 6, \"feed_rate\": 208, \"timestamp\": \"1979-03-19T21:00:01+0000\", \"machine_id\": 4, \"temperature\": 50, \"spindle_speed\": 10756, \"tool_wear_level\": 8, \"vibration_level\": 1.22, \"coolant_flow_rate\": 0.45, \"material_hardness\": 232, \"power_consumption\": 9.63}","reading_time":"1993-05-01 23:01:56"}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"\/?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"\/","per_page":10,"to":2,"total":2}}'
+        content: '{"data":[{"id":35,"machine_id":29,"machine_name":"aut","machine_type":"Painting Robot","sensor_data":"{\"humidity\": 52, \"timestamp\": \"2019-08-04T15:30:42+0000\", \"machine_id\": 29, \"temperature\": 24, \"arm_position\": {\"x\": 105.72, \"y\": 88.39, \"z\": 184.27}, \"atomizer_speed\": 24252, \"spray_pressure\": 2.8, \"paint_flow_rate\": 4.3, \"paint_thickness\": 125, \"paint_volume_used\": 0.85, \"solvent_concentration\": 9.69, \"booth_airflow_velocity\": 0.95, \"overspray_capture_efficiency\": 95}","reading_time":"2015-02-12 02:38:17"},{"id":36,"machine_id":34,"machine_name":"velit","machine_type":"Stamping Press","sensor_data":"{\"timestamp\": \"1999-02-26T02:08:14+0000\", \"cycle_time\": 10, \"machine_id\": 34, \"cycle_count\": 1469, \"noise_level\": 85, \"temperature\": 69, \"oil_pressure\": 3, \"die_alignment\": \"misaligned\", \"force_applied\": 409, \"sheet_thickness\": 1.1, \"vibration_level\": 0.84, \"power_consumption\": 13.12, \"lubrication_flow_rate\": 0.88}","reading_time":"2011-11-09 13:06:44"}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"\/?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"\/","per_page":10,"to":2,"total":2}}'
         headers: []
         description: ''
         custom: []
@@ -110,8 +111,23 @@ endpoints:
             "data": [
               {
                 "id": 1,
-                "sensor_id": 3,
-                "reading_value": 45.6,
+                "machine_id": 2,
+                "sensor_data": " {
+                   "machine_id": "welding_robot_006",
+                   "weld_temperature": 1600,             // in °C
+                   "weld_current": 150,                  // in A (amperes)
+                   "weld_voltage": 30,                   // in V
+                   "weld_time": 500,                     // in milliseconds
+                   "pressure_applied": 1000,             // in N (newtons)
+                   "arm_position": {"x": 120.5, "y": 80.4, "z": 200.3},  // spatial coordinates
+                   "wire_feed_rate": 5,                  // in mm/min (arc welding)
+                   "gas_flow_rate": 20,                  // in l/min
+                   "weld_strength_estimate": 2000,       // in N
+                   "vibration_level": 0.2,               // in mm/s
+                   "power_consumption": 3.5,             // in kWh
+                   "timestamp": "2024-10-14T11:00:00Z"
+                }",
+                "reading_time": "2024-10-18T10:00:00.000000Z",
                 "created_at": "2024-10-18T10:00:00.000000Z",
                 "updated_at": "2024-10-18T10:00:00.000000Z"
               },
@@ -130,7 +146,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer EPvV8a6ckd3f4Zh56D1ageb'
     controller: null
     method: null
     route: null
@@ -155,9 +174,10 @@ endpoints:
 
         After using this endpoint:
         - You will receive the details of the selected sensor reading.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -181,7 +201,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":{"id":28,"machine_id":2,"machine_name":"vel","machine_type":"Leak Test Machine","sensor_data":"{\"status\": \"pass\", \"leak_rate\": 0.94, \"timestamp\": \"1980-02-08T13:20:24+0000\", \"fluid_type\": \"air\", \"machine_id\": 2, \"temperature\": 30, \"pressure_drop\": 1, \"test_duration\": 45, \"test_pressure\": 9.9, \"seal_condition\": \"fail\", \"test_cycle_count\": 1501}","reading_time":"2013-07-12 07:40:57"}}'
+        content: '{"data":{"id":37,"machine_id":2,"machine_name":"aliquam","machine_type":"Welding Robot","sensor_data":"{\"timestamp\": \"2008-10-26T21:59:25+0000\", \"weld_time\": 514, \"machine_id\": 2, \"arm_position\": {\"x\": 122.04, \"y\": 87.49, \"z\": 217.66}, \"weld_current\": 132, \"weld_voltage\": 33, \"gas_flow_rate\": 17, \"wire_feed_rate\": 10, \"vibration_level\": 0.28, \"pressure_applied\": 1199, \"weld_temperature\": 1512, \"power_consumption\": 4.91, \"weld_strength_estimate\": 1931}","reading_time":"1990-09-10 20:21:03"}}'
         headers: []
         description: ''
         custom: []
@@ -190,8 +210,23 @@ endpoints:
         content: |-
           {
             "id": 1,
-            "sensor_id": 3,
-            "reading_value": 45.6,
+            "machine_id": 2,
+            "sensor_data": " {
+                   "machine_id": "welding_robot_006",
+                   "weld_temperature": 1600,             // in °C
+                   "weld_current": 150,                  // in A (amperes)
+                   "weld_voltage": 30,                   // in V
+                   "weld_time": 500,                     // in milliseconds
+                   "pressure_applied": 1000,             // in N (newtons)
+                   "arm_position": {"x": 120.5, "y": 80.4, "z": 200.3},  // spatial coordinates
+                   "wire_feed_rate": 5,                  // in mm/min (arc welding)
+                   "gas_flow_rate": 20,                  // in l/min
+                   "weld_strength_estimate": 2000,       // in N
+                   "vibration_level": 0.2,               // in mm/s
+                   "power_consumption": 3.5,             // in kWh
+                   "timestamp": "2024-10-14T11:00:00Z"
+            }",
+            "reading_time": "2024-10-18T10:00:00.000000Z",
             "created_at": "2024-10-18T10:00:00.000000Z",
             "updated_at": "2024-10-18T10:00:00.000000Z"
           }
@@ -205,7 +240,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 86h3kVD1E5PcaeZgvbf6a4d'
     controller: null
     method: null
     route: null
@@ -230,9 +268,10 @@ endpoints:
 
         After using this endpoint:
         - The sensor reading will be deleted from the system.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -267,7 +306,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer acveVbZg5dkD4368PahfE16'
     controller: null
     method: null
     route: null

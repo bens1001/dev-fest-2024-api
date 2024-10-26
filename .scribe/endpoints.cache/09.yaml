@@ -18,9 +18,10 @@ endpoints:
       subgroupDescription: ''
       title: 'List Data Points'
       description: 'Retrieve a list of data points with optional filters for KPI name, date range, and status.'
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -70,7 +71,7 @@ endpoints:
         name: per_page
         description: 'Optional. Number of results per page. Defaults to 10.'
         required: false
-        example: 9
+        example: 12
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -81,7 +82,7 @@ endpoints:
       start_date: '"2024-01-01".'
       end_date: '"2024-12-31".'
       status: '"active".'
-      per_page: 9
+      per_page: 12
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
@@ -128,7 +129,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 63kDfcgdvb1hV6E8eZP4a5a'
     controller: null
     method: null
     route: null
@@ -146,24 +150,15 @@ endpoints:
       subgroupDescription: ''
       title: 'Show Data Point'
       description: 'Retrieve a specific data point by its ID.'
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
       data_point_id:
         name: data_point_id
-        description: 'The ID of the data point.'
-        required: true
-        example: sapiente
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        custom: []
-      id:
-        name: id
         description: 'The ID of the data point to retrieve.'
         required: true
         example: 1
@@ -173,8 +168,7 @@ endpoints:
         nullable: false
         custom: []
     cleanUrlParameters:
-      data_point_id: sapiente
-      id: 1
+      data_point_id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -206,7 +200,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer ecPa483Ehgk5bZfVd1vDa66'
     controller: null
     method: null
     route: null

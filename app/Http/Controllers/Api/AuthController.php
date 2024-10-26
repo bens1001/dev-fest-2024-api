@@ -21,6 +21,8 @@ class AuthController extends Controller
      *
      * Authenticate a user and generate a new authentication token.
      *
+     * @unauthenticated
+     * 
      * ### Before using this endpoint:
      * - Ensure the user is registered in the system.
      * - Provide valid email and password credentials.
@@ -28,9 +30,18 @@ class AuthController extends Controller
      * ### After using this endpoint:
      * - A token will be generated for the user, which can be used for authenticated requests.
      *
+     * @bodyParam email string required The user's email address. Example: user@example.com
+     * @bodyParam password string required The user's password. Example: secret123
+     *
      * @response 200 {
      *   "token": "1|abc123tokenxyz",
-     *   "role": "admin"
+     *   "role": "admin",
+     *   "user": {
+     *     "id": 1,
+     *     "full_name": "John Doe",
+     *     "email": "user@example.com",
+     *     "gender": "male"
+     *   }
      * }
      * @response 401 {"message": "Unauthorized"}
      */
@@ -70,6 +81,8 @@ class AuthController extends Controller
      *
      * ### After using this endpoint:
      * - The user's tokens will be revoked, logging them out.
+     *
+     * @urlParam user_id int required The ID of the user to log out. Example: 1
      *
      * @response 200 {"message": "Logged out"}
      * @response 404 {"message": "User not found"}

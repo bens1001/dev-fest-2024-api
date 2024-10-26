@@ -39,10 +39,11 @@ class DefectController extends Controller
      *   "data": [
      *     {
      *       "id": 1,
-     *       "name": "Defect 1",
      *       "machine_id": 1,
-     *       "created_at": "2024-10-18T10:00:00.000000Z",
-     *       "updated_at": "2024-10-18T10:00:00.000000Z"
+     *       "machine_name": "Machine 1",
+     *       "machine_type": "Type A",
+     *       "defect_type": "Type X",
+     *       "defect_time": "2024-10-18T10:00:00.000000Z"
      *     },
      *     ...
      *   ],
@@ -81,10 +82,11 @@ class DefectController extends Controller
      *
      * @response 200 {
      *   "id": 1,
-     *   "name": "Defect 1",
      *   "machine_id": 1,
-     *   "created_at": "2024-10-18T10:00:00.000000Z",
-     *   "updated_at": "2024-10-18T10:00:00.000000Z"
+     *   "machine_name": "Machine 1",
+     *   "machine_type": "Type A",
+     *   "defect_type": "Type X",
+     *   "defect_time": "2024-10-18T10:00:00.000000Z"
      * }
      * @response 404 {"message": "Not found"}
      */
@@ -115,10 +117,11 @@ class DefectController extends Controller
      *
      * @response 201 {
      *   "id": 1,
-     *   "name": "Defect 1",
      *   "machine_id": 1,
-     *   "created_at": "2024-10-18T10:00:00.000000Z",
-     *   "updated_at": "2024-10-18T10:00:00.000000Z"
+     *   "machine_name": "Machine 1",
+     *   "machine_type": "Type A",
+     *   "defect_type": "Type X",
+     *   "defect_time": "2024-10-18T10:00:00.000000Z"
      * }
      * @response 404 {"message": "Not found"}
      */
@@ -177,10 +180,11 @@ class DefectController extends Controller
      *
      * @response 200 {
      *   "id": 1,
-     *   "name": "Updated Defect 1",
      *   "machine_id": 1,
-     *   "created_at": "2024-10-18T10:00:00.000000Z",
-     *   "updated_at": "2024-10-18T10:10:00.000000Z"
+     *   "machine_name": "Machine 1",
+     *   "machine_type": "Type A",
+     *   "defect_type": "Updated Type X",
+     *   "defect_time": "2024-10-18T10:10:00.000000Z"
      * }
      * @response 404 {"message": "Not found"}
      */

@@ -23,9 +23,10 @@ endpoints:
 
         After using this endpoint:
         - You will get a list of machines, optionally filtered by status or machine type.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -38,7 +39,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":[{"id":76,"machine_type":"CNC Machine","machine_name":"tempora","status":"running","last_maintenance":"2024-10-05 23:44:22","first_usage":"2024-08-01 00:35:43"},{"id":77,"machine_type":"Stamping Press","machine_name":"laboriosam","status":"running","last_maintenance":"2023-11-30 04:09:31","first_usage":"2024-05-10 11:36:46"}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"\/?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"\/","per_page":10,"to":2,"total":2}}'
+        content: '{"data":[{"id":91,"machine_type":"Automated Guided Vehicle","machine_name":"quia","status":"maintenance","last_maintenance":"2024-03-29 13:51:51","first_usage":"2024-10-22 02:00:31"},{"id":92,"machine_type":"Leak Test Machine","machine_name":"perspiciatis","status":"idle","last_maintenance":"2024-08-07 06:23:15","first_usage":"2024-01-24 16:22:11"}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"\/?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"\/","per_page":10,"to":2,"total":2}}'
         headers: []
         description: ''
         custom: []
@@ -49,11 +50,11 @@ endpoints:
             "data": [
               {
                 "id": 1,
-                "name": "Machine A",
-                "status": "active",
                 "machine_type": "type1",
-                "created_at": "2024-10-18T10:00:00.000000Z",
-                "updated_at": "2024-10-18T10:00:00.000000Z"
+                "machine_name": "Machine A",
+                "status": "active",
+                "last_maintenance": "2024-10-18T10:00:00.000000Z",
+                "first_usage": "2023-10-18T10:00:00.000000Z"
               },
               ...
             ],
@@ -70,7 +71,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer PV5a8h6kZ63vcb4fE1eDagd'
     controller: null
     method: null
     route: null
@@ -95,9 +99,10 @@ endpoints:
 
         After using this endpoint:
         - You will receive detailed information about the selected machine.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -121,7 +126,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":{"id":78,"machine_type":"CNC Machine","machine_name":"laborum","status":"running","last_maintenance":"2024-04-05 21:02:02","first_usage":"2024-09-25 17:51:09"}}'
+        content: '{"data":{"id":93,"machine_type":"Automated Guided Vehicle","machine_name":"nihil","status":"maintenance","last_maintenance":"2024-03-07 14:07:30","first_usage":"2024-01-13 05:20:35"}}'
         headers: []
         description: ''
         custom: []
@@ -130,11 +135,11 @@ endpoints:
         content: |-
           {
             "id": 1,
-            "name": "Machine A",
-            "status": "active",
             "machine_type": "type1",
-            "created_at": "2024-10-18T10:00:00.000000Z",
-            "updated_at": "2024-10-18T10:00:00.000000Z"
+            "machine_name": "Machine A",
+            "status": "active",
+            "last_maintenance": "2024-10-18T10:00:00.000000Z",
+            "first_usage": "2023-10-18T10:00:00.000000Z"
           }
         headers: []
         description: ''
@@ -146,7 +151,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Vv16ca4a5ZEf8gbDdhPke63'
     controller: null
     method: null
     route: null
@@ -171,9 +179,10 @@ endpoints:
 
         After using this endpoint:
         - A new machine will be created in the system.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -185,7 +194,7 @@ endpoints:
         name: machine_type
         description: ''
         required: true
-        example: 'Stamping Press'
+        example: 'Welding Robot'
         type: string
         enumValues:
           - 'Welding Robot'
@@ -201,7 +210,7 @@ endpoints:
         name: machine_name
         description: ''
         required: true
-        example: earum
+        example: quis
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -224,7 +233,7 @@ endpoints:
         name: last_maintenance
         description: 'Must be a valid date. Must be a valid date in the format <code>Y-m-d H:i:s</code>. Must be a date before <code>now</code>. Must be a date after <code>first_usage</code>.'
         required: true
-        example: '2092-01-15'
+        example: '2092-09-10'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -234,23 +243,23 @@ endpoints:
         name: first_usage
         description: 'Must be a valid date. Must be a valid date in the format <code>Y-m-d H:i:s</code>. Must be a date before <code>now</code>. Must be a date before <code>last_maintenance</code>.'
         required: true
-        example: '2010-04-15'
+        example: '2016-04-12'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanBodyParameters:
-      machine_type: 'Stamping Press'
-      machine_name: earum
+      machine_type: 'Welding Robot'
+      machine_name: quis
       status: idle
-      last_maintenance: '2092-01-15'
-      first_usage: '2010-04-15'
+      last_maintenance: '2092-09-10'
+      first_usage: '2016-04-12'
     fileParameters: []
     responses:
       -
         status: 200
-        content: '{"data":{"id":79,"machine_type":"Stamping Press","machine_name":"harum","status":"idle","last_maintenance":"2024-08-17 11:11:43","first_usage":"2024-09-25 18:43:04"}}'
+        content: '{"data":{"id":94,"machine_type":"Welding Robot","machine_name":"nihil","status":"idle","last_maintenance":"2024-04-25 00:45:17","first_usage":"2024-08-24 00:24:14"}}'
         headers: []
         description: ''
         custom: []
@@ -259,11 +268,11 @@ endpoints:
         content: |-
           {
             "id": 1,
-            "name": "Machine A",
-            "status": "active",
             "machine_type": "type1",
-            "created_at": "2024-10-18T10:00:00.000000Z",
-            "updated_at": "2024-10-18T10:00:00.000000Z"
+            "machine_name": "Machine A",
+            "status": "active",
+            "last_maintenance": "2024-10-18T10:00:00.000000Z",
+            "first_usage": "2023-10-18T10:00:00.000000Z"
           }
         headers: []
         description: ''
@@ -275,7 +284,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6EeDv1b58ZVgcP6fa3ahk4d'
     controller: null
     method: null
     route: null
@@ -301,9 +313,10 @@ endpoints:
 
         After using this endpoint:
         - The machine's details will be updated in the system.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -326,7 +339,7 @@ endpoints:
         name: machine_name
         description: ''
         required: false
-        example: dolorem
+        example: recusandae
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -336,7 +349,7 @@ endpoints:
         name: status
         description: ''
         required: false
-        example: maintenance
+        example: idle
         type: string
         enumValues:
           - running
@@ -349,7 +362,7 @@ endpoints:
         name: last_maintenance
         description: 'Must be a valid date. Must be a valid date in the format <code>Y-m-d H:i:s</code>. Must be a date before <code>now</code>. Must be a date after <code>first_usage</code>.'
         required: false
-        example: '2083-01-24'
+        example: '2065-08-26'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -359,22 +372,22 @@ endpoints:
         name: first_usage
         description: 'Must be a valid date. Must be a valid date in the format <code>Y-m-d H:i:s</code>. Must be a date before <code>now</code>. Must be a date before <code>last_maintenance</code>.'
         required: false
-        example: '1999-05-14'
+        example: '2003-01-19'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanBodyParameters:
-      machine_name: dolorem
-      status: maintenance
-      last_maintenance: '2083-01-24'
-      first_usage: '1999-05-14'
+      machine_name: recusandae
+      status: idle
+      last_maintenance: '2065-08-26'
+      first_usage: '2003-01-19'
     fileParameters: []
     responses:
       -
         status: 200
-        content: '{"data":{"id":80,"machine_type":"Painting Robot","machine_name":"dolores","status":"running","last_maintenance":"2023-12-05 11:09:00","first_usage":"2023-12-14 16:16:53"}}'
+        content: '{"data":{"id":95,"machine_type":"Leak Test Machine","machine_name":"cumque","status":"idle","last_maintenance":"2024-01-20 00:31:24","first_usage":"2024-07-28 17:22:03"}}'
         headers: []
         description: ''
         custom: []
@@ -383,11 +396,11 @@ endpoints:
         content: |-
           {
             "id": 1,
-            "name": "Machine A",
-            "status": "inactive",
             "machine_type": "type2",
-            "created_at": "2024-10-18T10:00:00.000000Z",
-            "updated_at": "2024-10-18T10:10:00.000000Z"
+            "machine_name": "Machine B",
+            "status": "inactive",
+            "last_maintenance": "2024-10-18T10:10:00.000000Z",
+            "first_usage": "2023-10-18T10:00:00.000000Z"
           }
         headers: []
         description: ''
@@ -399,7 +412,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 8h534caveg6DbafdkE6V1ZP'
     controller: null
     method: null
     route: null
@@ -424,9 +440,10 @@ endpoints:
 
         After using this endpoint:
         - The machine will be removed from the system.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -461,7 +478,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer kfcgE61ZdPDabe865vV43ha'
     controller: null
     method: null
     route: null

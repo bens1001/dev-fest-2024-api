@@ -35,11 +35,11 @@ class MachineController extends Controller
      *   "data": [
      *     {
      *       "id": 1,
-     *       "name": "Machine A",
-     *       "status": "active",
      *       "machine_type": "type1",
-     *       "created_at": "2024-10-18T10:00:00.000000Z",
-     *       "updated_at": "2024-10-18T10:00:00.000000Z"
+     *       "machine_name": "Machine A",
+     *       "status": "active",
+     *       "last_maintenance": "2024-10-18T10:00:00.000000Z",
+     *       "first_usage": "2023-10-18T10:00:00.000000Z"
      *     },
      *     ...
      *   ],
@@ -89,11 +89,11 @@ class MachineController extends Controller
      *
      * @response 200 {
      *   "id": 1,
-     *   "name": "Machine A",
-     *   "status": "active",
      *   "machine_type": "type1",
-     *   "created_at": "2024-10-18T10:00:00.000000Z",
-     *   "updated_at": "2024-10-18T10:00:00.000000Z"
+     *   "machine_name": "Machine A",
+     *   "status": "active",
+     *   "last_maintenance": "2024-10-18T10:00:00.000000Z",
+     *   "first_usage": "2023-10-18T10:00:00.000000Z"
      * }
      * @response 404 {"message": "Not found"}
      */
@@ -123,11 +123,11 @@ class MachineController extends Controller
      *
      * @response 201 {
      *   "id": 1,
-     *   "name": "Machine A",
-     *   "status": "active",
      *   "machine_type": "type1",
-     *   "created_at": "2024-10-18T10:00:00.000000Z",
-     *   "updated_at": "2024-10-18T10:00:00.000000Z"
+     *   "machine_name": "Machine A",
+     *   "status": "active",
+     *   "last_maintenance": "2024-10-18T10:00:00.000000Z",
+     *   "first_usage": "2023-10-18T10:00:00.000000Z"
      * }
      * @response 404 {"message": "Not found"}
      */
@@ -163,11 +163,11 @@ class MachineController extends Controller
      *
      * @response 200 {
      *   "id": 1,
-     *   "name": "Machine A",
-     *   "status": "inactive",
      *   "machine_type": "type2",
-     *   "created_at": "2024-10-18T10:00:00.000000Z",
-     *   "updated_at": "2024-10-18T10:10:00.000000Z"
+     *   "machine_name": "Machine B",
+     *   "status": "inactive",
+     *   "last_maintenance": "2024-10-18T10:10:00.000000Z",
+     *   "first_usage": "2023-10-18T10:00:00.000000Z"
      * }
      * @response 404 {"message": "Not found"}
      */

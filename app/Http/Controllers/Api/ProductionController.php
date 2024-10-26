@@ -37,8 +37,13 @@ class ProductionController extends Controller
      *     {
      *       "id": 1,
      *       "machine_id": 5,
+     *       "machine_name": "Machine A",
+     *       "machine_type": "Type X",
+     *       "start_time": "2024-10-18T09:00:00.000000Z",
+     *       "end_time": "2024-10-18T10:00:00.000000Z",
+     *       "output_quantity": 1000,
+     *       "target_quantity": 1200,
      *       "production_date": "2024-10-18",
-     *       "quantity": 1000,
      *       "created_at": "2024-10-18T10:00:00.000000Z",
      *       "updated_at": "2024-10-18T10:00:00.000000Z"
      *     },
@@ -85,8 +90,13 @@ class ProductionController extends Controller
      * @response 200 {
      *   "id": 1,
      *   "machine_id": 5,
+     *   "machine_name": "Machine A",
+     *   "machine_type": "Type X",
+     *   "start_time": "2024-10-18T09:00:00.000000Z",
+     *   "end_time": "2024-10-18T10:00:00.000000Z",
+     *   "output_quantity": 1000,
+     *   "target_quantity": 1200,
      *   "production_date": "2024-10-18",
-     *   "quantity": 1000,
      *   "created_at": "2024-10-18T10:00:00.000000Z",
      *   "updated_at": "2024-10-18T10:00:00.000000Z"
      * }
@@ -120,8 +130,13 @@ class ProductionController extends Controller
      * @response 201 {
      *   "id": 1,
      *   "machine_id": 5,
+     *   "machine_name": "Machine A",
+     *   "machine_type": "Type X",
+     *   "start_time": "2024-10-18T09:00:00.000000Z",
+     *   "end_time": "2024-10-18T10:00:00.000000Z",
+     *   "output_quantity": 1000,
+     *   "target_quantity": 1200,
      *   "production_date": "2024-10-18",
-     *   "quantity": 1000,
      *   "created_at": "2024-10-18T10:00:00.000000Z",
      *   "updated_at": "2024-10-18T10:00:00.000000Z"
      * }
@@ -167,8 +182,13 @@ class ProductionController extends Controller
      * @response 200 {
      *   "id": 1,
      *   "machine_id": 5,
+     *   "machine_name": "Machine A",
+     *   "machine_type": "Type X",
+     *   "start_time": "2024-10-18T09:00:00.000000Z",
+     *   "end_time": "2024-10-18T10:10:00.000000Z",
+     *   "output_quantity": 1200,
+     *   "target_quantity": 1200,
      *   "production_date": "2024-10-18",
-     *   "quantity": 1200,
      *   "created_at": "2024-10-18T10:00:00.000000Z",
      *   "updated_at": "2024-10-18T10:10:00.000000Z"
      * }

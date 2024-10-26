@@ -23,9 +23,10 @@ endpoints:
 
         After using this endpoint:
         - You will receive a list of production records, optionally filtered by machine ID.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -38,7 +39,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":[{"id":36,"machine_id":47,"machine_name":"aliquam","machine_type":"Stamping Press","start_time":"2024-10-19 09:05:08","end_time":"2024-10-30 11:20:12","output_quantity":737,"target_quantity":560},{"id":37,"machine_id":37,"machine_name":"veritatis","machine_type":"Automated Guided Vehicle","start_time":"2024-10-24 17:10:36","end_time":"2024-10-27 20:59:12","output_quantity":125,"target_quantity":654}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"\/?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"\/","per_page":10,"to":2,"total":2}}'
+        content: '{"data":[{"id":51,"machine_id":3,"machine_name":"pariatur","machine_type":"CNC Machine","start_time":"2024-10-26 07:50:27","end_time":"2024-10-29 11:57:40","output_quantity":883,"target_quantity":32},{"id":52,"machine_id":7,"machine_name":"alias","machine_type":"Automated Guided Vehicle","start_time":"2024-10-22 00:02:41","end_time":"2024-11-01 13:11:22","output_quantity":402,"target_quantity":703}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"\/?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"\/","per_page":10,"to":2,"total":2}}'
         headers: []
         description: ''
         custom: []
@@ -50,8 +51,13 @@ endpoints:
               {
                 "id": 1,
                 "machine_id": 5,
+                "machine_name": "Machine A",
+                "machine_type": "Type X",
+                "start_time": "2024-10-18T09:00:00.000000Z",
+                "end_time": "2024-10-18T10:00:00.000000Z",
+                "output_quantity": 1000,
+                "target_quantity": 1200,
                 "production_date": "2024-10-18",
-                "quantity": 1000,
                 "created_at": "2024-10-18T10:00:00.000000Z",
                 "updated_at": "2024-10-18T10:00:00.000000Z"
               },
@@ -70,7 +76,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 3ae5E81VfPcdghv4kbaZ6D6'
     controller: null
     method: null
     route: null
@@ -95,9 +104,10 @@ endpoints:
 
         After using this endpoint:
         - You will receive detailed information about the selected production record.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -121,7 +131,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":{"id":38,"machine_id":36,"machine_name":"tempore","machine_type":"Automated Guided Vehicle","start_time":"2024-10-23 01:58:57","end_time":"2024-10-30 20:18:00","output_quantity":15,"target_quantity":651}}'
+        content: '{"data":{"id":53,"machine_id":50,"machine_name":"consequatur","machine_type":"Painting Robot","start_time":"2024-10-20 17:57:15","end_time":"2024-10-27 18:52:39","output_quantity":9,"target_quantity":46}}'
         headers: []
         description: ''
         custom: []
@@ -131,8 +141,13 @@ endpoints:
           {
             "id": 1,
             "machine_id": 5,
+            "machine_name": "Machine A",
+            "machine_type": "Type X",
+            "start_time": "2024-10-18T09:00:00.000000Z",
+            "end_time": "2024-10-18T10:00:00.000000Z",
+            "output_quantity": 1000,
+            "target_quantity": 1200,
             "production_date": "2024-10-18",
-            "quantity": 1000,
             "created_at": "2024-10-18T10:00:00.000000Z",
             "updated_at": "2024-10-18T10:00:00.000000Z"
           }
@@ -146,7 +161,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer D1f6PvZb83hd56VEceagk4a'
     controller: null
     method: null
     route: null
@@ -172,9 +190,10 @@ endpoints:
 
         After using this endpoint:
         - A new production record will be created.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -197,7 +216,7 @@ endpoints:
         name: start_time
         description: 'Must be a valid date. Must be a valid date in the format <code>Y-m-d H:i:s</code>. Must be a date before <code>end_time</code>.'
         required: true
-        example: '2016-12-25'
+        example: '2017-09-28'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -207,7 +226,7 @@ endpoints:
         name: end_time
         description: 'Must be a valid date. Must be a valid date in the format <code>Y-m-d H:i:s</code>. Must be a date after <code>start_time</code>.'
         required: true
-        example: '2063-09-21'
+        example: '2039-07-06'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -227,22 +246,22 @@ endpoints:
         name: target_quantity
         description: ''
         required: true
-        example: 7
+        example: 2
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanBodyParameters:
-      start_time: '2016-12-25'
-      end_time: '2063-09-21'
+      start_time: '2017-09-28'
+      end_time: '2039-07-06'
       output_quantity: 6
-      target_quantity: 7
+      target_quantity: 2
     fileParameters: []
     responses:
       -
         status: 200
-        content: '{"data":{"id":39,"machine_id":18,"machine_name":"ut","machine_type":"Welding Robot","start_time":"2024-10-21 11:12:22","end_time":"2024-10-30 10:19:12","output_quantity":385,"target_quantity":658}}'
+        content: '{"data":{"id":54,"machine_id":35,"machine_name":"cum","machine_type":"Welding Robot","start_time":"2024-10-21 02:28:27","end_time":"2024-11-01 02:40:30","output_quantity":472,"target_quantity":183}}'
         headers: []
         description: ''
         custom: []
@@ -252,8 +271,13 @@ endpoints:
           {
             "id": 1,
             "machine_id": 5,
+            "machine_name": "Machine A",
+            "machine_type": "Type X",
+            "start_time": "2024-10-18T09:00:00.000000Z",
+            "end_time": "2024-10-18T10:00:00.000000Z",
+            "output_quantity": 1000,
+            "target_quantity": 1200,
             "production_date": "2024-10-18",
-            "quantity": 1000,
             "created_at": "2024-10-18T10:00:00.000000Z",
             "updated_at": "2024-10-18T10:00:00.000000Z"
           }
@@ -267,7 +291,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer h658ceDE13b4vZg6dPakafV'
     controller: null
     method: null
     route: null
@@ -293,9 +320,10 @@ endpoints:
 
         After using this endpoint:
         - The production record's details will be updated in the system.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -318,7 +346,7 @@ endpoints:
         name: start_time
         description: 'Must be a valid date. Must be a valid date in the format <code>Y-m-d H:i:s</code>. Must be a date before <code>end_time</code>.'
         required: false
-        example: '1999-11-18'
+        example: '2008-02-07'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -328,7 +356,7 @@ endpoints:
         name: end_time
         description: 'Must be a valid date. Must be a valid date in the format <code>Y-m-d H:i:s</code>. Must be a date after <code>start_time</code>.'
         required: false
-        example: '2079-12-04'
+        example: '2070-06-06'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -338,7 +366,7 @@ endpoints:
         name: output_quantity
         description: ''
         required: false
-        example: 13
+        example: 10
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -348,22 +376,22 @@ endpoints:
         name: target_quantity
         description: ''
         required: false
-        example: 17
+        example: 14
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanBodyParameters:
-      start_time: '1999-11-18'
-      end_time: '2079-12-04'
-      output_quantity: 13
-      target_quantity: 17
+      start_time: '2008-02-07'
+      end_time: '2070-06-06'
+      output_quantity: 10
+      target_quantity: 14
     fileParameters: []
     responses:
       -
         status: 200
-        content: '{"data":{"id":40,"machine_id":42,"machine_name":"iusto","machine_type":"Painting Robot","start_time":"2024-10-19 09:48:49","end_time":"2024-10-26 23:04:09","output_quantity":840,"target_quantity":951}}'
+        content: '{"data":{"id":55,"machine_id":15,"machine_name":"harum","machine_type":"Stamping Press","start_time":"2024-10-20 16:12:40","end_time":"2024-10-26 23:01:50","output_quantity":147,"target_quantity":949}}'
         headers: []
         description: ''
         custom: []
@@ -373,8 +401,13 @@ endpoints:
           {
             "id": 1,
             "machine_id": 5,
+            "machine_name": "Machine A",
+            "machine_type": "Type X",
+            "start_time": "2024-10-18T09:00:00.000000Z",
+            "end_time": "2024-10-18T10:10:00.000000Z",
+            "output_quantity": 1200,
+            "target_quantity": 1200,
             "production_date": "2024-10-18",
-            "quantity": 1200,
             "created_at": "2024-10-18T10:00:00.000000Z",
             "updated_at": "2024-10-18T10:10:00.000000Z"
           }
@@ -388,7 +421,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer c564Ze1Dhv83agPfVka6dEb'
     controller: null
     method: null
     route: null
@@ -413,9 +449,10 @@ endpoints:
 
         After using this endpoint:
         - The production record will be removed from the system.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -450,7 +487,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 56fa6gd84EDkPeabZch1v3V'
     controller: null
     method: null
     route: null

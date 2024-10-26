@@ -23,9 +23,10 @@ endpoints:
 
         After using this endpoint:
         - You will get a list of defects, filtered as needed.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -38,7 +39,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":[{"id":36,"machine_id":25,"machine_name":"explicabo","machine_type":"CNC Machine","defect_type":"software","defect_time":"2024-10-19 16:03:36"},{"id":37,"machine_id":11,"machine_name":"aut","machine_type":"Stamping Press","defect_type":"electrical","defect_time":"2024-10-20 04:26:32"}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"\/?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"\/","per_page":10,"to":2,"total":2}}'
+        content: '{"data":[{"id":51,"machine_id":43,"machine_name":"at","machine_type":"Stamping Press","defect_type":"electrical","defect_time":"2024-10-19 13:04:54"},{"id":52,"machine_id":44,"machine_name":"omnis","machine_type":"Leak Test Machine","defect_type":"software","defect_time":"2024-10-23 04:03:06"}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"\/?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"\/","per_page":10,"to":2,"total":2}}'
         headers: []
         description: ''
         custom: []
@@ -49,10 +50,11 @@ endpoints:
             "data": [
               {
                 "id": 1,
-                "name": "Defect 1",
                 "machine_id": 1,
-                "created_at": "2024-10-18T10:00:00.000000Z",
-                "updated_at": "2024-10-18T10:00:00.000000Z"
+                "machine_name": "Machine 1",
+                "machine_type": "Type A",
+                "defect_type": "Type X",
+                "defect_time": "2024-10-18T10:00:00.000000Z"
               },
               ...
             ],
@@ -69,7 +71,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 8bhae3kEavf54DV1gPcd66Z'
     controller: null
     method: null
     route: null
@@ -94,9 +99,10 @@ endpoints:
 
         After using this endpoint:
         - You will receive detailed information about the selected defect.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -120,7 +126,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":{"id":38,"machine_id":22,"machine_name":"ut","machine_type":"Painting Robot","defect_type":"electrical","defect_time":"2024-10-21 05:03:07"}}'
+        content: '{"data":{"id":53,"machine_id":27,"machine_name":"repudiandae","machine_type":"Leak Test Machine","defect_type":"software","defect_time":"2024-10-25 11:43:51"}}'
         headers: []
         description: ''
         custom: []
@@ -129,10 +135,11 @@ endpoints:
         content: |-
           {
             "id": 1,
-            "name": "Defect 1",
             "machine_id": 1,
-            "created_at": "2024-10-18T10:00:00.000000Z",
-            "updated_at": "2024-10-18T10:00:00.000000Z"
+            "machine_name": "Machine 1",
+            "machine_type": "Type A",
+            "defect_type": "Type X",
+            "defect_time": "2024-10-18T10:00:00.000000Z"
           }
         headers: []
         description: ''
@@ -144,7 +151,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer Va1h3Dcadkv85Pbf4ZE66eg'
     controller: null
     method: null
     route: null
@@ -170,9 +180,10 @@ endpoints:
 
         After using this endpoint:
         - A new defect will be created and associated with the machine.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -195,7 +206,7 @@ endpoints:
         name: defect_type
         description: ''
         required: true
-        example: mechanical
+        example: electrical
         type: string
         enumValues:
           - mechanical
@@ -208,20 +219,20 @@ endpoints:
         name: defect_time
         description: 'Must be a valid date. Must be a valid date in the format <code>Y-m-d H:i:s</code>. Must be a date before <code>now</code>.'
         required: true
-        example: '2010-05-05'
+        example: '2019-07-06'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanBodyParameters:
-      defect_type: mechanical
-      defect_time: '2010-05-05'
+      defect_type: electrical
+      defect_time: '2019-07-06'
     fileParameters: []
     responses:
       -
         status: 200
-        content: '{"data":{"id":39,"machine_id":23,"machine_name":"nemo","machine_type":"Leak Test Machine","defect_type":"mechanical","defect_time":"2024-10-19 09:20:56"}}'
+        content: '{"data":{"id":54,"machine_id":47,"machine_name":"rerum","machine_type":"Automated Guided Vehicle","defect_type":"electrical","defect_time":"2024-10-23 09:35:38"}}'
         headers: []
         description: ''
         custom: []
@@ -230,10 +241,11 @@ endpoints:
         content: |-
           {
             "id": 1,
-            "name": "Defect 1",
             "machine_id": 1,
-            "created_at": "2024-10-18T10:00:00.000000Z",
-            "updated_at": "2024-10-18T10:00:00.000000Z"
+            "machine_name": "Machine 1",
+            "machine_type": "Type A",
+            "defect_type": "Type X",
+            "defect_time": "2024-10-18T10:00:00.000000Z"
           }
         headers: []
         description: ''
@@ -245,7 +257,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer c6Zh513a6agdDek8VPvbf4E'
     controller: null
     method: null
     route: null
@@ -271,9 +286,10 @@ endpoints:
 
         After using this endpoint:
         - The defect's details will be updated in the system.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -296,7 +312,7 @@ endpoints:
         name: defect_type
         description: ''
         required: false
-        example: electrical
+        example: mechanical
         type: string
         enumValues:
           - mechanical
@@ -309,20 +325,20 @@ endpoints:
         name: defect_time
         description: 'Must be a valid date. Must be a date before <code>now</code>.'
         required: false
-        example: '2016-07-13'
+        example: '2024-08-10'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanBodyParameters:
-      defect_type: electrical
-      defect_time: '2016-07-13'
+      defect_type: mechanical
+      defect_time: '2024-08-10'
     fileParameters: []
     responses:
       -
         status: 200
-        content: '{"data":{"id":40,"machine_id":49,"machine_name":"itaque","machine_type":"Leak Test Machine","defect_type":"mechanical","defect_time":"2024-10-20 15:58:51"}}'
+        content: '{"data":{"id":55,"machine_id":30,"machine_name":"et","machine_type":"Automated Guided Vehicle","defect_type":"mechanical","defect_time":"2024-10-20 18:42:18"}}'
         headers: []
         description: ''
         custom: []
@@ -331,10 +347,11 @@ endpoints:
         content: |-
           {
             "id": 1,
-            "name": "Updated Defect 1",
             "machine_id": 1,
-            "created_at": "2024-10-18T10:00:00.000000Z",
-            "updated_at": "2024-10-18T10:10:00.000000Z"
+            "machine_name": "Machine 1",
+            "machine_type": "Type A",
+            "defect_type": "Updated Type X",
+            "defect_time": "2024-10-18T10:10:00.000000Z"
           }
         headers: []
         description: ''
@@ -346,7 +363,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 3cf5ED1a6PahVebkZ46vg8d'
     controller: null
     method: null
     route: null
@@ -371,9 +391,10 @@ endpoints:
 
         After using this endpoint:
         - The defect will be removed from the system.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -408,7 +429,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6ac8f564gva3PEVeDhkdbZ1'
     controller: null
     method: null
     route: null

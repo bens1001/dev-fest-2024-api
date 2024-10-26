@@ -175,7 +175,17 @@ return new class extends Migration
         $roleAdmin = Role::create(['name' => 'admin', 'guard_name' => 'web']);
 
         // Assign permissions to roles
-        $roleOperator->givePermissionTo(['view machines', 'view alerts', 'view production', 'view sensor_readings', 'view energy_usage', 'view defects', 'login','view tasks','logout']);
+        $roleOperator->givePermissionTo([
+            'view machines',
+            'view alerts',
+            'view production',
+            'view sensor_readings',
+            'view energy_usage',
+            'view defects',
+            'login',
+            'view tasks',
+            'view users'
+        ]);
         $roleManager->givePermissionTo([
             'view machines',
             'view alerts',

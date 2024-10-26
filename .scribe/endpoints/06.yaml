@@ -23,9 +23,10 @@ endpoints:
 
         After using this endpoint:
         - You will get a list of energy usage records, filtered as needed.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -38,7 +39,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":[{"id":36,"machine_id":23,"machine_name":"nemo","machine_type":"Leak Test Machine","energy_consumed":302.93,"start_shift_time":"2009-08-13 00:18:37","end_shift_time":"1982-07-13 13:27:28"},{"id":37,"machine_id":24,"machine_name":"beatae","machine_type":"Automated Guided Vehicle","energy_consumed":212.06,"start_shift_time":"2004-08-17 01:54:57","end_shift_time":"1989-01-25 13:34:18"}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"\/?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"\/","per_page":10,"to":2,"total":2}}'
+        content: '{"data":[{"id":51,"machine_id":30,"machine_name":"et","machine_type":"Automated Guided Vehicle","energy_consumed":705.67,"start_shift_time":"1973-03-04 16:43:20","end_shift_time":"1970-11-25 03:02:28"},{"id":52,"machine_id":12,"machine_name":"similique","machine_type":"Welding Robot","energy_consumed":481.78,"start_shift_time":"2024-10-01 05:43:24","end_shift_time":"1996-04-24 05:36:35"}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"\/?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"\/","per_page":10,"to":2,"total":2}}'
         headers: []
         description: ''
         custom: []
@@ -50,9 +51,11 @@ endpoints:
               {
                 "id": 1,
                 "machine_id": 1,
+                "machine_name": "Machine A",
+                "machine_type": "Type X",
                 "energy_consumed": 123.45,
-                "created_at": "2024-10-18T10:00:00.000000Z",
-                "updated_at": "2024-10-18T10:00:00.000000Z"
+                "start_shift_time": "2024-10-18T08:00:00.000000Z",
+                "end_shift_time": "2024-10-18T10:00:00.000000Z"
               },
               ...
             ],
@@ -69,7 +72,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer h614E3g8Zeav6kdPbaDfcV5'
     controller: null
     method: null
     route: null
@@ -94,9 +100,10 @@ endpoints:
 
         After using this endpoint:
         - You will receive detailed information about the selected energy usage record.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -120,7 +127,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":{"id":38,"machine_id":20,"machine_name":"sed","machine_type":"Automated Guided Vehicle","energy_consumed":787.92,"start_shift_time":"1983-03-23 15:15:30","end_shift_time":"2001-11-24 09:00:39"}}'
+        content: '{"data":{"id":53,"machine_id":31,"machine_name":"aut","machine_type":"Automated Guided Vehicle","energy_consumed":86.01,"start_shift_time":"2016-03-21 09:57:17","end_shift_time":"2016-11-11 06:28:19"}}'
         headers: []
         description: ''
         custom: []
@@ -130,9 +137,11 @@ endpoints:
           {
             "id": 1,
             "machine_id": 1,
+            "machine_name": "Machine A",
+            "machine_type": "Type X",
             "energy_consumed": 123.45,
-            "created_at": "2024-10-18T10:00:00.000000Z",
-            "updated_at": "2024-10-18T10:00:00.000000Z"
+            "start_shift_time": "2024-10-18T08:00:00.000000Z",
+            "end_shift_time": "2024-10-18T10:00:00.000000Z"
           }
         headers: []
         description: ''
@@ -144,7 +153,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 8e5gPDavdE664aZbck1h3Vf'
     controller: null
     method: null
     route: null
@@ -170,9 +182,10 @@ endpoints:
 
         After using this endpoint:
         - A new energy usage record will be created and associated with the machine.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -195,7 +208,7 @@ endpoints:
         name: energy_consumed
         description: ''
         required: true
-        example: 28.7700178
+        example: 0.35105
         type: number
         enumValues: []
         exampleWasSpecified: false
@@ -205,7 +218,7 @@ endpoints:
         name: start_shift_time
         description: 'Must be a valid date. Must be a valid date in the format <code>Y-m-d H:i:s</code>. Must be a date before <code>end_shift_time</code>.'
         required: true
-        example: '2022-04-14'
+        example: '2006-09-05'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -215,21 +228,21 @@ endpoints:
         name: end_shift_time
         description: 'Must be a valid date. Must be a valid date in the format <code>Y-m-d H:i:s</code>. Must be a date after <code>start_shift_time</code>.'
         required: true
-        example: '2120-12-02'
+        example: '2061-06-27'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanBodyParameters:
-      energy_consumed: 28.7700178
-      start_shift_time: '2022-04-14'
-      end_shift_time: '2120-12-02'
+      energy_consumed: 0.35105
+      start_shift_time: '2006-09-05'
+      end_shift_time: '2061-06-27'
     fileParameters: []
     responses:
       -
         status: 200
-        content: '{"data":{"id":39,"machine_id":20,"machine_name":"sed","machine_type":"Automated Guided Vehicle","energy_consumed":323.69,"start_shift_time":"1973-07-09 09:10:21","end_shift_time":"2011-05-13 20:15:13"}}'
+        content: '{"data":{"id":54,"machine_id":40,"machine_name":"alias","machine_type":"Stamping Press","energy_consumed":307.04,"start_shift_time":"2006-02-07 03:14:04","end_shift_time":"2024-03-31 12:01:08"}}'
         headers: []
         description: ''
         custom: []
@@ -239,9 +252,11 @@ endpoints:
           {
             "id": 1,
             "machine_id": 1,
+            "machine_name": "Machine A",
+            "machine_type": "Type X",
             "energy_consumed": 123.45,
-            "created_at": "2024-10-18T10:00:00.000000Z",
-            "updated_at": "2024-10-18T10:00:00.000000Z"
+            "start_shift_time": "2024-10-18T08:00:00.000000Z",
+            "end_shift_time": "2024-10-18T10:00:00.000000Z"
           }
         headers: []
         description: ''
@@ -253,7 +268,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer gv86hPZadbaD3Vck51Efe46'
     controller: null
     method: null
     route: null
@@ -279,9 +297,10 @@ endpoints:
 
         After using this endpoint:
         - The energy usage record's details will be updated in the system.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -304,7 +323,7 @@ endpoints:
         name: energy_consumed
         description: ''
         required: false
-        example: 7.54986
+        example: 73.5323
         type: number
         enumValues: []
         exampleWasSpecified: false
@@ -314,7 +333,7 @@ endpoints:
         name: start_shift_time
         description: 'Must be a valid date. Must be a date before <code>end_shift_time</code>.'
         required: false
-        example: '2008-05-05'
+        example: '2020-04-05'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -324,21 +343,21 @@ endpoints:
         name: end_shift_time
         description: 'Must be a valid date. Must be a date after <code>start_shift_time</code>.'
         required: false
-        example: '2054-12-13'
+        example: '2105-03-10'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanBodyParameters:
-      energy_consumed: 7.54986
-      start_shift_time: '2008-05-05'
-      end_shift_time: '2054-12-13'
+      energy_consumed: 73.5323
+      start_shift_time: '2020-04-05'
+      end_shift_time: '2105-03-10'
     fileParameters: []
     responses:
       -
         status: 200
-        content: '{"data":{"id":40,"machine_id":32,"machine_name":"repudiandae","machine_type":"Automated Guided Vehicle","energy_consumed":853.55,"start_shift_time":"2013-10-13 12:55:48","end_shift_time":"1975-04-06 06:33:27"}}'
+        content: '{"data":{"id":55,"machine_id":49,"machine_name":"mollitia","machine_type":"Leak Test Machine","energy_consumed":198.05,"start_shift_time":"1986-12-06 00:26:13","end_shift_time":"2003-07-09 16:58:09"}}'
         headers: []
         description: ''
         custom: []
@@ -348,9 +367,11 @@ endpoints:
           {
             "id": 1,
             "machine_id": 1,
+            "machine_name": "Machine A",
+            "machine_type": "Type X",
             "energy_consumed": 150.75,
-            "created_at": "2024-10-18T10:00:00.000000Z",
-            "updated_at": "2024-10-18T10:10:00.000000Z"
+            "start_shift_time": "2024-10-18T08:00:00.000000Z",
+            "end_shift_time": "2024-10-18T10:10:00.000000Z"
           }
         headers: []
         description: ''
@@ -362,7 +383,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer VPEg16aZ48e3kfd6b5hvacD'
     controller: null
     method: null
     route: null
@@ -387,9 +411,10 @@ endpoints:
 
         After using this endpoint:
         - The energy usage record will be removed from the system.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -424,7 +449,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer cvdgVPehk18aa3Z6E5D46fb'
     controller: null
     method: null
     route: null

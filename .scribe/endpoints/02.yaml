@@ -23,9 +23,10 @@ endpoints:
 
         After using this endpoint:
         - You will receive a paginated list of users, optionally filtered by gender.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -38,7 +39,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":[{"id":41,"full_name":"Darlene Lockman II","gender":"male","email":"nsmitham@example.org","role":null},{"id":42,"full_name":"Felix Hahn","gender":"female","email":"quigley.kaylah@example.net","role":null}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"\/?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"\/","per_page":10,"to":2,"total":2}}'
+        content: '{"data":[{"id":53,"full_name":"Emmanuelle Collier","gender":"female","email":"gardner.trantow@example.com","role":null,"created_at":"2024-10-26T08:36:05.000000Z"},{"id":54,"full_name":"Prof. Lucile Wilderman","gender":"male","email":"cody56@example.com","role":null,"created_at":"2024-10-26T08:36:06.000000Z"}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"\/?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"\/","per_page":10,"to":2,"total":2}}'
         headers: []
         description: ''
         custom: []
@@ -49,9 +50,10 @@ endpoints:
             "data": [
               {
                 "id": 1,
-                "name": "John Doe",
-                "email": "john@example.com",
+                "full_name": "John Doe",
                 "gender": "male",
+                "email": "john@example.com",
+                "role": "operator",
                 "created_at": "2024-10-18T10:00:00.000000Z",
                 "updated_at": "2024-10-18T10:00:00.000000Z"
               },
@@ -70,7 +72,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 1P8a3VE66vdkcg5ehbDaf4Z'
     controller: null
     method: null
     route: null
@@ -95,9 +100,10 @@ endpoints:
 
         After using this endpoint:
         - You will receive the details of the selected user.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -121,7 +127,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":{"id":43,"full_name":"Marcus Anderson","gender":"female","email":"anibal.abshire@example.net","role":null}}'
+        content: '{"data":{"id":55,"full_name":"Logan Kautzer","gender":"female","email":"bernard.mertz@example.org","role":null,"created_at":"2024-10-26T08:36:06.000000Z"}}'
         headers: []
         description: ''
         custom: []
@@ -130,9 +136,10 @@ endpoints:
         content: |-
           {
             "id": 1,
-            "name": "John Doe",
-            "email": "john@example.com",
+            "full_name": "John Doe",
             "gender": "male",
+            "email": "john@example.com",
+            "role": "operator",
             "created_at": "2024-10-18T10:00:00.000000Z",
             "updated_at": "2024-10-18T10:00:00.000000Z"
           }
@@ -146,7 +153,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer ZcPafE5vgkae668V134hdDb'
     controller: null
     method: null
     route: null
@@ -171,9 +181,10 @@ endpoints:
 
         After using this endpoint:
         - The new user will be created and returned.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -185,7 +196,7 @@ endpoints:
         name: full_name
         description: ''
         required: true
-        example: iste
+        example: reiciendis
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -195,7 +206,7 @@ endpoints:
         name: email
         description: 'Must be a valid email address.'
         required: true
-        example: uquigley@example.org
+        example: pat53@example.net
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -205,7 +216,7 @@ endpoints:
         name: password
         description: 'Must be at least 8 characters.'
         required: true
-        example: ';51G1?`TcJB,ag'
+        example: uGM+/@Q
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -237,16 +248,16 @@ endpoints:
         nullable: false
         custom: []
     cleanBodyParameters:
-      full_name: iste
-      email: uquigley@example.org
-      password: ';51G1?`TcJB,ag'
+      full_name: reiciendis
+      email: pat53@example.net
+      password: uGM+/@Q
       gender: male
       role: admin
     fileParameters: []
     responses:
       -
         status: 200
-        content: '{"data":{"id":44,"full_name":"Prof. Torrey Sporer","gender":"male","email":"merritt52@example.com","role":null}}'
+        content: '{"data":{"id":56,"full_name":"Gabe Haag","gender":"female","email":"lonny.gottlieb@example.net","role":null,"created_at":"2024-10-26T08:36:06.000000Z"}}'
         headers: []
         description: ''
         custom: []
@@ -255,9 +266,10 @@ endpoints:
         content: |-
           {
             "id": 1,
-            "name": "John Doe",
-            "email": "john@example.com",
+            "full_name": "John Doe",
             "gender": "male",
+            "email": "john@example.com",
+            "role": "operator",
             "created_at": "2024-10-18T10:00:00.000000Z",
             "updated_at": "2024-10-18T10:00:00.000000Z"
           }
@@ -271,7 +283,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer fP4bavdZE6681Vhecagk3D5'
     controller: null
     method: null
     route: null
@@ -296,9 +311,10 @@ endpoints:
 
         After using this endpoint:
         - The user's details will be updated with the provided data.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -321,7 +337,7 @@ endpoints:
         name: full_name
         description: ''
         required: false
-        example: corporis
+        example: quo
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -331,7 +347,7 @@ endpoints:
         name: email
         description: 'Must be a valid email address.'
         required: false
-        example: jarrell48@example.net
+        example: parker.doris@example.com
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -350,14 +366,14 @@ endpoints:
         nullable: false
         custom: []
     cleanBodyParameters:
-      full_name: corporis
-      email: jarrell48@example.net
+      full_name: quo
+      email: parker.doris@example.com
       gender: female
     fileParameters: []
     responses:
       -
         status: 200
-        content: '{"data":{"id":45,"full_name":"Natalie Lindgren","gender":"male","email":"cbernhard@example.net","role":null}}'
+        content: '{"data":{"id":57,"full_name":"Yasmeen Lemke DDS","gender":"female","email":"wkuhlman@example.org","role":null,"created_at":"2024-10-26T08:36:06.000000Z"}}'
         headers: []
         description: ''
         custom: []
@@ -366,9 +382,10 @@ endpoints:
         content: |-
           {
             "id": 1,
-            "name": "Updated John Doe",
-            "email": "john.updated@example.com",
+            "full_name": "Updated John Doe",
             "gender": "male",
+            "email": "john.updated@example.com",
+            "role": "operator",
             "created_at": "2024-10-18T10:00:00.000000Z",
             "updated_at": "2024-10-18T10:00:00.000000Z"
           }
@@ -382,7 +399,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 63a1ahEfgvd8DkVbZe645Pc'
     controller: null
     method: null
     route: null
@@ -407,9 +427,10 @@ endpoints:
 
         After using this endpoint:
         - The user will be deleted from the system.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -444,7 +465,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer DZk4f1a3bEv65h8cP6gdeaV'
     controller: null
     method: null
     route: null

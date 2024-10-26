@@ -37,9 +37,11 @@ class EnergyUsageController extends Controller
      *     {
      *       "id": 1,
      *       "machine_id": 1,
+     *       "machine_name": "Machine A",
+     *       "machine_type": "Type X",
      *       "energy_consumed": 123.45,
-     *       "created_at": "2024-10-18T10:00:00.000000Z",
-     *       "updated_at": "2024-10-18T10:00:00.000000Z"
+     *       "start_shift_time": "2024-10-18T08:00:00.000000Z",
+     *       "end_shift_time": "2024-10-18T10:00:00.000000Z"
      *     },
      *     ...
      *   ],
@@ -85,9 +87,11 @@ class EnergyUsageController extends Controller
      * @response 200 {
      *   "id": 1,
      *   "machine_id": 1,
+     *   "machine_name": "Machine A",
+     *   "machine_type": "Type X",
      *   "energy_consumed": 123.45,
-     *   "created_at": "2024-10-18T10:00:00.000000Z",
-     *   "updated_at": "2024-10-18T10:00:00.000000Z"
+     *   "start_shift_time": "2024-10-18T08:00:00.000000Z",
+     *   "end_shift_time": "2024-10-18T10:00:00.000000Z"
      * }
      * @response 404 {"message": "Not found"}
      */
@@ -119,9 +123,11 @@ class EnergyUsageController extends Controller
      * @response 201 {
      *   "id": 1,
      *   "machine_id": 1,
+     *   "machine_name": "Machine A",
+     *   "machine_type": "Type X",
      *   "energy_consumed": 123.45,
-     *   "created_at": "2024-10-18T10:00:00.000000Z",
-     *   "updated_at": "2024-10-18T10:00:00.000000Z"
+     *   "start_shift_time": "2024-10-18T08:00:00.000000Z",
+     *   "end_shift_time": "2024-10-18T10:00:00.000000Z"
      * }
      * @response 404 {"message": "Not found"}
      */
@@ -165,9 +171,11 @@ class EnergyUsageController extends Controller
      * @response 200 {
      *   "id": 1,
      *   "machine_id": 1,
+     *   "machine_name": "Machine A",
+     *   "machine_type": "Type X",
      *   "energy_consumed": 150.75,
-     *   "created_at": "2024-10-18T10:00:00.000000Z",
-     *   "updated_at": "2024-10-18T10:10:00.000000Z"
+     *   "start_shift_time": "2024-10-18T08:00:00.000000Z",
+     *   "end_shift_time": "2024-10-18T10:10:00.000000Z"
      * }
      * @response 404 {"message": "Not found"}
      */

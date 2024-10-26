@@ -28,7 +28,7 @@ class AlertController extends Controller
      * After using this endpoint:
      * - You can view or manage the alerts fetched.
      *
-     * Return a collection with pagination.
+     * Returns a paginated collection.
      * @apiResourceCollection App\Http\Resources\AlertResource
      * @apiResourceModel App\Models\Alert paginate=10
      *
@@ -36,9 +36,11 @@ class AlertController extends Controller
      *   "data": [
      *     {
      *       "id": 1,
-     *       "title": "Alert 1",
-     *       "description": "Description of alert 1",
-     *       "created_at": "2024-10-18T00:00:00.000000Z"
+     *       "machine_id": "stamping_press_001",
+     *       "machine_name": "Stamping Press",
+     *       "machine_type": "Press",
+     *       "alert_message": "Machine temperature too high",
+     *       "alert_time": "2024-10-18T00:00:00.000000Z"
      *     },
      *     ...
      *   ],
@@ -87,15 +89,17 @@ class AlertController extends Controller
      * After using this endpoint:
      * - You can view details of the selected alert.
      *
-     * Return a single value.
+     * Returns a single alert.
      * @apiResource App\Http\Resources\AlertResource
      * @apiResourceModel App\Models\Alert
      *
      * @response 200 {
      *   "id": 1,
-     *   "title": "Alert 1",
-     *   "description": "Description of alert 1",
-     *   "created_at": "2024-10-18T00:00:00.000000Z"
+     *   "machine_id": "stamping_press_001",
+     *   "machine_name": "Stamping Press",
+     *   "machine_type": "Press",
+     *   "alert_message": "Machine temperature too high",
+     *   "alert_time": "2024-10-18T00:00:00.000000Z"
      * }
      * @response 404 {"message": "Not found"}
      */
@@ -121,7 +125,7 @@ class AlertController extends Controller
      * After using this endpoint:
      * - The selected alert will be deleted from the system.
      *
-     * @response 200 {"message": "Defect deleted"}
+     * @response 200 {"message": "Alert deleted"}
      * @response 404 {"message": "Not found"}
      */
     public function destroy(int $alert_id)

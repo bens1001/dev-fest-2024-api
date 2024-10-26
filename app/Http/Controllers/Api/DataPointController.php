@@ -89,7 +89,7 @@ class DataPointController extends Controller
      *
      * Retrieve a specific data point by its ID.
      *
-     * @urlParam id int required The ID of the data point to retrieve. Example: 1
+     * @urlParam data_point_id int required The ID of the data point to retrieve. Example: 1
      *
      * @response 200 {
      *     "data": {
@@ -104,10 +104,10 @@ class DataPointController extends Controller
      *     "message": "Not found"
      * }
      */
-    public function show($id)
+    public function show($data_point_id)
     {
         try {
-            $dataPoint = DataPoint::findOrFail($id);
+            $dataPoint = DataPoint::findOrFail($data_point_id);
 
             return new DataPointResource($dataPoint);
         } catch (\Exception $e) {

@@ -22,6 +22,8 @@ class SensorReadingController extends Controller
      *
      * This endpoint receives sensor data from a specified machine and stores it in the database.
      *
+     * @unauthenticated
+     * 
      * @response 201 {
      *   "message": "Sensor readings saved successfully"
      * }
@@ -76,19 +78,16 @@ class SensorReadingController extends Controller
         }
     }
 
-
-
-
     /**
      * List Sensor Readings
      *
-     * Retrieve a paginated list of sensor readings, with optional filtering by sensor ID.
+     * Retrieve a paginated list of sensor readings, with optional filtering by machine ID.
      *
      * Before using this endpoint:
      * - Ensure sensor readings are available.
      *
      * After using this endpoint:
-     * - You will receive a paginated list of sensor readings, optionally filtered by sensor ID.
+     * - You will receive a paginated list of sensor readings, optionally filtered by machine ID.
      *
      * @apiResourceCollection App\Http\Resources\SensorReadingResource
      * @apiResourceModel App\Models\SensorReading paginate=10
@@ -97,8 +96,23 @@ class SensorReadingController extends Controller
      *   "data": [
      *     {
      *       "id": 1,
-     *       "sensor_id": 3,
-     *       "reading_value": 45.6,
+     *       "machine_id": 2,
+     *       "sensor_data": " {
+     *          "machine_id": "welding_robot_006",
+     *          "weld_temperature": 1600,             // in °C
+     *          "weld_current": 150,                  // in A (amperes)
+     *          "weld_voltage": 30,                   // in V
+     *          "weld_time": 500,                     // in milliseconds
+     *          "pressure_applied": 1000,             // in N (newtons)
+     *          "arm_position": {"x": 120.5, "y": 80.4, "z": 200.3},  // spatial coordinates
+     *          "wire_feed_rate": 5,                  // in mm/min (arc welding)
+     *          "gas_flow_rate": 20,                  // in l/min
+     *          "weld_strength_estimate": 2000,       // in N
+     *          "vibration_level": 0.2,               // in mm/s
+     *          "power_consumption": 3.5,             // in kWh
+     *          "timestamp": "2024-10-14T11:00:00Z"
+     *       }",
+     *       "reading_time": "2024-10-18T10:00:00.000000Z",
      *       "created_at": "2024-10-18T10:00:00.000000Z",
      *       "updated_at": "2024-10-18T10:00:00.000000Z"
      *     },
@@ -111,7 +125,7 @@ class SensorReadingController extends Controller
      */
     public function index(Request $request)
     {
-        try { 
+        try {
             $query = SensorReading::query();
 
             // Optional filtering
@@ -146,8 +160,23 @@ class SensorReadingController extends Controller
      *
      * @response 200 {
      *   "id": 1,
-     *   "sensor_id": 3,
-     *   "reading_value": 45.6,
+     *   "machine_id": 2,
+     *   "sensor_data": " {
+     *          "machine_id": "welding_robot_006",
+     *          "weld_temperature": 1600,             // in °C
+     *          "weld_current": 150,                  // in A (amperes)
+     *          "weld_voltage": 30,                   // in V
+     *          "weld_time": 500,                     // in milliseconds
+     *          "pressure_applied": 1000,             // in N (newtons)
+     *          "arm_position": {"x": 120.5, "y": 80.4, "z": 200.3},  // spatial coordinates
+     *          "wire_feed_rate": 5,                  // in mm/min (arc welding)
+     *          "gas_flow_rate": 20,                  // in l/min
+     *          "weld_strength_estimate": 2000,       // in N
+     *          "vibration_level": 0.2,               // in mm/s
+     *          "power_consumption": 3.5,             // in kWh
+     *          "timestamp": "2024-10-14T11:00:00Z"
+     *   }",
+     *   "reading_time": "2024-10-18T10:00:00.000000Z",
      *   "created_at": "2024-10-18T10:00:00.000000Z",
      *   "updated_at": "2024-10-18T10:00:00.000000Z"
      * }

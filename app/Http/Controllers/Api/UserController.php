@@ -37,9 +37,10 @@ class UserController extends Controller
      *   "data": [
      *     {
      *       "id": 1,
-     *       "name": "John Doe",
-     *       "email": "john@example.com",
+     *       "full_name": "John Doe",
      *       "gender": "male",
+     *       "email": "john@example.com",
+     *       "role": "operator",
      *       "created_at": "2024-10-18T10:00:00.000000Z",
      *       "updated_at": "2024-10-18T10:00:00.000000Z"
      *     },
@@ -90,9 +91,10 @@ class UserController extends Controller
      *
      * @response 200 {
      *   "id": 1,
-     *   "name": "John Doe",
-     *   "email": "john@example.com",
+     *   "full_name": "John Doe",
      *   "gender": "male",
+     *   "email": "john@example.com",
+     *   "role": "operator",
      *   "created_at": "2024-10-18T10:00:00.000000Z",
      *   "updated_at": "2024-10-18T10:00:00.000000Z"
      * }
@@ -101,6 +103,11 @@ class UserController extends Controller
     public function show(int $user_id)
     {
         try {
+            if(request()->user()->hasRole('operator')){
+                if($user_id !== request()->user()->id){
+                    return response()->json(['message' => 'Forbidden'], 403);
+                }
+            }
             $user = User::findOrFail($user_id);
             return new UserResource($user);
         } catch (\Exception $e) {
@@ -124,9 +131,10 @@ class UserController extends Controller
      *
      * @response 201 {
      *   "id": 1,
-     *   "name": "John Doe",
-     *   "email": "john@example.com",
+     *   "full_name": "John Doe",
      *   "gender": "male",
+     *   "email": "john@example.com",
+     *   "role": "operator",
      *   "created_at": "2024-10-18T10:00:00.000000Z",
      *   "updated_at": "2024-10-18T10:00:00.000000Z"
      * }
@@ -168,8 +176,6 @@ class UserController extends Controller
         }
     }
 
-
-
     /**
      * Update a User
      *
@@ -186,9 +192,10 @@ class UserController extends Controller
      *
      * @response 200 {
      *   "id": 1,
-     *   "name": "Updated John Doe",
-     *   "email": "john.updated@example.com",
+     *   "full_name": "Updated John Doe",
      *   "gender": "male",
+     *   "email": "john.updated@example.com",
+     *   "role": "operator",
      *   "created_at": "2024-10-18T10:00:00.000000Z",
      *   "updated_at": "2024-10-18T10:00:00.000000Z"
      * }

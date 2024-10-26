@@ -23,9 +23,10 @@ endpoints:
 
         After using this endpoint:
         - You will receive a paginated list of tasks, optionally filtered by status.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -38,7 +39,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":[{"id":31,"task_description":"energy usage logging","user_id":2,"user_full_name":"Dr. Bette Schneider","due_date":"2024-11-22 06:28:55","status":"todo","created_at":"2024-10-26T06:34:55.000000Z"},{"id":32,"task_description":"energy usage logging","user_id":6,"user_full_name":"Freeda Frami","due_date":"2024-11-03 23:21:29","status":"completed","created_at":"2024-10-26T06:34:55.000000Z"}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"\/?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"\/","per_page":10,"to":2,"total":2}}'
+        content: '{"data":[{"id":43,"task_description":"energy usage logging","user_id":10,"user_full_name":"Mr. Raymundo Hauck","due_date":"2024-11-22 16:12:20","status":"todo","created_at":"2024-10-26T08:36:06.000000Z"},{"id":44,"task_description":"production logging","user_id":4,"user_full_name":"Ms. Jalyn Stanton","due_date":"2024-11-03 14:27:27","status":"pending","created_at":"2024-10-26T08:36:06.000000Z"}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"\/?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"\/","per_page":10,"to":2,"total":2}}'
         headers: []
         description: ''
         custom: []
@@ -49,10 +50,12 @@ endpoints:
             "data": [
               {
                 "id": 1,
-                "title": "Task 1",
+                "task_description": "Task 1",
+                "user_id": 1,
+                "user_full_name": "John Doe",
+                "due_date": "2024-10-30",
                 "status": "pending",
-                "created_at": "2024-10-18T10:00:00.000000Z",
-                "updated_at": "2024-10-18T10:00:00.000000Z"
+                "created_at": "2024-10-18T10:00:00.000000Z"
               },
               ...
             ],
@@ -69,7 +72,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer baka6hVg41dvPE8eD56cfZ3'
     controller: null
     method: null
     route: null
@@ -94,9 +100,10 @@ endpoints:
 
         After using this endpoint:
         - You will receive the details of the selected task.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -120,7 +127,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":{"id":33,"task_description":"production logging","user_id":11,"user_full_name":"Zoila Pacocha","due_date":"2024-11-14 20:42:13","status":"completed","created_at":"2024-10-26T06:34:55.000000Z"}}'
+        content: '{"data":{"id":45,"task_description":"energy usage logging","user_id":10,"user_full_name":"Mr. Raymundo Hauck","due_date":"2024-11-14 18:49:22","status":"todo","created_at":"2024-10-26T08:36:06.000000Z"}}'
         headers: []
         description: ''
         custom: []
@@ -129,10 +136,12 @@ endpoints:
         content: |-
           {
             "id": 1,
-            "title": "Task 1",
+            "task_description": "Task 1",
+            "user_id": 1,
+            "user_full_name": "John Doe",
+            "due_date": "2024-10-30",
             "status": "pending",
-            "created_at": "2024-10-18T10:00:00.000000Z",
-            "updated_at": "2024-10-18T10:00:00.000000Z"
+            "created_at": "2024-10-18T10:00:00.000000Z"
           }
         headers: []
         description: ''
@@ -144,7 +153,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 1653a86keZhgcVvaEDdPbf4'
     controller: null
     method: null
     route: null
@@ -169,9 +181,10 @@ endpoints:
 
         After using this endpoint:
         - The task will be updated with the new details.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -194,7 +207,7 @@ endpoints:
         name: user_id
         description: 'The <code>id</code> of an existing record in the users table.'
         required: false
-        example: 2
+        example: 15
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -204,7 +217,7 @@ endpoints:
         name: task_description
         description: ''
         required: false
-        example: ex
+        example: tenetur
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -214,7 +227,7 @@ endpoints:
         name: due_date
         description: 'Must be a valid date. Must be a valid date in the format <code>Y-m-d H:i:s</code>.'
         required: false
-        example: '2024-10-26 06:34:55'
+        example: '2024-10-26 08:36:06'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -224,7 +237,7 @@ endpoints:
         name: status
         description: ''
         required: false
-        example: todo
+        example: pending
         type: string
         enumValues:
           - todo
@@ -234,15 +247,15 @@ endpoints:
         nullable: false
         custom: []
     cleanBodyParameters:
-      user_id: 2
-      task_description: ex
-      due_date: '2024-10-26 06:34:55'
-      status: todo
+      user_id: 15
+      task_description: tenetur
+      due_date: '2024-10-26 08:36:06'
+      status: pending
     fileParameters: []
     responses:
       -
         status: 200
-        content: '{"data":{"id":34,"task_description":"maintenance","user_id":7,"user_full_name":"Pablo Johns","due_date":"2024-11-08 09:04:28","status":"completed","created_at":"2024-10-26T06:34:55.000000Z"}}'
+        content: '{"data":{"id":46,"task_description":"energy usage logging","user_id":1,"user_full_name":"Admin","due_date":"2024-10-31 03:12:55","status":"completed","created_at":"2024-10-26T08:36:06.000000Z"}}'
         headers: []
         description: ''
         custom: []
@@ -251,11 +264,12 @@ endpoints:
         content: |-
           {
             "id": 1,
-
-            "title": "Updated Task",
+            "task_description": "Updated Task",
+            "user_id": 1,
+            "user_full_name": "John Doe",
+            "due_date": "2024-10-30",
             "status": "completed",
-            "created_at": "2024-10-18T10:00:00.000000Z",
-            "updated_at": "2024-10-18T10:00:00.000000Z"
+            "created_at": "2024-10-18T10:00:00.000000Z"
           }
         headers: []
         description: ''
@@ -267,7 +281,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer kZf6dv4g8h6acbeP3VE1aD5'
     controller: null
     method: null
     route: null
@@ -292,9 +309,10 @@ endpoints:
 
         After using this endpoint:
         - The task will be deleted from the system.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -329,7 +347,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 3d5cPaZ618DaE6ekb4fvghV'
     controller: null
     method: null
     route: null

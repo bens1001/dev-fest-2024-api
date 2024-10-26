@@ -41,23 +41,23 @@ class DataProcessingService
         ]);
 
         if ($response->successful()) {
-            $isAnomaly = $response->json()['status'];
+            $anomalyResult = $response->json();
 
             // Save the data point in DataPoints table
             $dataPoint = DataPoint::create([
-                'timestamp' => $record['Timestamp'],
-                'kpi_name' => $record['KPI_Name'],
-                'kpi_value' => $record['KPI_Value'],
-                'status' => $isAnomaly,
+                'timestamp' => $anomalyResult['Timestamp'],
+                'kpi_name' => $anomalyResult['KPI_Name'],
+                'kpi_value' => $anomalyResult['KPI_Value'],
+                'status' => $anomalyResult['status'],
             ]);
 
             // If anomaly detected, create an entry in the Alerts table
-            if ($isAnomaly) {
+            if ($anomalyResult['status']) {
                 Alert::create([
                     'data_point_id' => $dataPoint->id,
                     'machine_id' => Machine::pluck('id')->random(),
                     'alert_message' => 'Anomaly detected',
-                    'alert_time' => $record['Timestamp'],
+                    'alert_time' => $anomalyResult['Timestamp'],
                 ]);
             }
         } else {

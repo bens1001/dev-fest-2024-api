@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(DataProcessingService::class, function ($app) {
             return new DataProcessingService(
                 storage_path('app/test_set_rec.csv'),
-                env('FLASK_MODEL_URL')
+                env('FLASK_MODEL_URL').'/detect',
             );
         });
     }

@@ -27,10 +27,11 @@ endpoints:
         After using this endpoint:
         - You can view or manage the alerts fetched.
 
-        Return a collection with pagination.
-      authenticated: false
+        Returns a paginated collection.
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -43,7 +44,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":[{"id":null,"machine_id":49,"machine_name":"itaque","machine_type":"Leak Test Machine","alert_message":"Minima neque aut numquam modi.","alert_time":{"date":"1998-09-07 15:45:22.000000","timezone_type":3,"timezone":"UTC"}},{"id":null,"machine_id":48,"machine_name":"cumque","machine_type":"CNC Machine","alert_message":"Ab earum excepturi consequatur est.","alert_time":{"date":"2021-02-09 18:06:13.000000","timezone_type":3,"timezone":"UTC"}}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"\/?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"\/","per_page":10,"to":2,"total":2}}'
+        content: '{"data":[{"id":null,"machine_id":23,"machine_name":"consequatur","machine_type":"Automated Guided Vehicle","alert_message":"Deleniti consequuntur ut iste soluta.","alert_time":{"date":"2021-06-26 16:23:03.000000","timezone_type":3,"timezone":"UTC"}},{"id":null,"machine_id":49,"machine_name":"mollitia","machine_type":"Leak Test Machine","alert_message":"Ipsa distinctio repellat repellendus sunt nulla maxime est.","alert_time":{"date":"1979-06-01 02:40:17.000000","timezone_type":3,"timezone":"UTC"}}],"links":{"first":"\/?page=1","last":"\/?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"\/?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"\/","per_page":10,"to":2,"total":2}}'
         headers: []
         description: ''
         custom: []
@@ -54,9 +55,11 @@ endpoints:
             "data": [
               {
                 "id": 1,
-                "title": "Alert 1",
-                "description": "Description of alert 1",
-                "created_at": "2024-10-18T00:00:00.000000Z"
+                "machine_id": "stamping_press_001",
+                "machine_name": "Stamping Press",
+                "machine_type": "Press",
+                "alert_message": "Machine temperature too high",
+                "alert_time": "2024-10-18T00:00:00.000000Z"
               },
               ...
             ],
@@ -86,7 +89,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 3g6hEeZa8fk4d6vbP5DacV1'
     controller: null
     method: null
     route: null
@@ -112,10 +118,11 @@ endpoints:
         After using this endpoint:
         - You can view details of the selected alert.
 
-        Return a single value.
-      authenticated: false
+        Returns a single alert.
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -123,14 +130,14 @@ endpoints:
         name: alert_id
         description: 'The ID of the alert.'
         required: true
-        example: 11
+        example: 19
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      alert_id: 11
+      alert_id: 19
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -139,7 +146,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"data":{"id":null,"machine_id":39,"machine_name":"sed","machine_type":"Painting Robot","alert_message":"Quibusdam vitae voluptatem sit culpa est tempora.","alert_time":{"date":"2024-07-24 10:20:57.000000","timezone_type":3,"timezone":"UTC"}}}'
+        content: '{"data":{"id":null,"machine_id":49,"machine_name":"mollitia","machine_type":"Leak Test Machine","alert_message":"Reiciendis unde facilis magni consequatur consectetur vel nemo.","alert_time":{"date":"1998-08-08 15:20:50.000000","timezone_type":3,"timezone":"UTC"}}}'
         headers: []
         description: ''
         custom: []
@@ -148,9 +155,11 @@ endpoints:
         content: |-
           {
             "id": 1,
-            "title": "Alert 1",
-            "description": "Description of alert 1",
-            "created_at": "2024-10-18T00:00:00.000000Z"
+            "machine_id": "stamping_press_001",
+            "machine_name": "Stamping Press",
+            "machine_type": "Press",
+            "alert_message": "Machine temperature too high",
+            "alert_time": "2024-10-18T00:00:00.000000Z"
           }
         headers: []
         description: ''
@@ -162,7 +171,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 364k5gV1faavbePd6DE8chZ'
     controller: null
     method: null
     route: null
@@ -188,9 +200,10 @@ endpoints:
 
         After using this endpoint:
         - The selected alert will be deleted from the system.
-      authenticated: false
+      authenticated: true
       custom: []
     headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
     urlParameters:
@@ -198,14 +211,14 @@ endpoints:
         name: alert_id
         description: 'The ID of the alert.'
         required: true
-        example: 18
+        example: 15
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      alert_id: 18
+      alert_id: 15
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -214,7 +227,7 @@ endpoints:
     responses:
       -
         status: 200
-        content: '{"message": "Defect deleted"}'
+        content: '{"message": "Alert deleted"}'
         headers: []
         description: ''
         custom: []
@@ -225,7 +238,10 @@ endpoints:
         description: ''
         custom: []
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer V4d5eDZ86P1akE3acv6bfgh'
     controller: null
     method: null
     route: null

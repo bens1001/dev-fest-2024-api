@@ -43,7 +43,7 @@ Then, run the database migrations to set up the schema:
 ## API Documentation
 
 Full API documentation is available on **SwaggerHub**:
-- [SwaggerHub API Documentation](https://app.swaggerhub.com/apis/ABDELHAMIDBENSALAH35/dev-fest_2024_2nd_challenge_api_documentation/1.0.0)
+- [SwaggerHub API Documentation](https://app.swaggerhub.com/apis/ABDELHAMIDBENSALAH35/dev-fest_2024_2nd_challenge_api_documentation/1.0.1)
 
 - ![image](https://github.com/user-attachments/assets/98d501be-d8a5-42d9-bdb4-4e771f8e459c)
 
