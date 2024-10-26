@@ -1,6 +1,6 @@
 <h1 align="center">Welcome to Smart Analytics Platform for Car Manufacturing Operations 👋</h1>
 <p>
-  <a href="https://app.swaggerhub.com/apis/ABDELHAMIDBENSALAH35/dev-fest_2024_2nd_challenge_api_documentation/1.0.0" target="_blank">
+  <a href="https://app.swaggerhub.com/apis/ABDELHAMIDBENSALAH35/dev-fest_2024_2nd_challenge_api_documentation/1.0.1" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
 </p>
@@ -45,7 +45,33 @@ Then, run the database migrations to set up the schema:
 Full API documentation is available on **SwaggerHub**:
 - [SwaggerHub API Documentation](https://app.swaggerhub.com/apis/ABDELHAMIDBENSALAH35/dev-fest_2024_2nd_challenge_api_documentation/1.0.1)
 
-- ![image](https://github.com/user-attachments/assets/98d501be-d8a5-42d9-bdb4-4e771f8e459c)
+- ![image](https://github.com/user-attachments/assets/a06e97d9-1427-4a04-af40-734e5ec93dd2)
+
+### Generating Documentation with Scribe
+
+Since the Scribe package is already installed and configured, you can generate the API documentation using the following command:
+
+```sh
+php artisan scribe:generate
+```
+
+You can view it by navigating to `http://your-app-url/docs` in your web browser.
+
+### OpenAPI and Postman Collection
+
+- **OpenAPI Specification**:
+  You can access the OpenAPI specification in JSON format at the following URL:
+
+  ```
+  http://your-app-url/docs/openapi.json
+  ```
+
+- **Postman Collection**:
+  To use the Postman collection, you can import the following URL into Postman:
+
+  ```
+  http://your-app-url/docs/postman_collection.json
+  ```
 
 ### API Overview
 
